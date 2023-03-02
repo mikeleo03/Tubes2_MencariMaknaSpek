@@ -1,0 +1,8 @@
+C:\Users\axioo\Documents\ITB - Informatika\Semester 4\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes2_MencariMaknaSpek\src\TreasureHunt\TreasureHunt\bin\Debug\TreasureHunt.exe.config
+C:\Users\axioo\Documents\ITB - Informatika\Semester 4\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes2_MencariMaknaSpek\src\TreasureHunt\TreasureHunt\bin\Debug\TreasureHunt.exe
+C:\Users\axioo\Documents\ITB - Informatika\Semester 4\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes2_MencariMaknaSpek\src\TreasureHunt\TreasureHunt\bin\Debug\TreasureHunt.pdb
+C:\Users\axioo\Documents\ITB - Informatika\Semester 4\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes2_MencariMaknaSpek\src\TreasureHunt\TreasureHunt\obj\Debug\TreasureHunt.csproj.AssemblyReference.cache
+C:\Users\axioo\Documents\ITB - Informatika\Semester 4\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes2_MencariMaknaSpek\src\TreasureHunt\TreasureHunt\obj\Debug\TreasureHunt.csproj.SuggestedBindingRedirects.cache
+C:\Users\axioo\Documents\ITB - Informatika\Semester 4\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes2_MencariMaknaSpek\src\TreasureHunt\TreasureHunt\obj\Debug\TreasureHunt.csproj.CoreCompileInputs.cache
+C:\Users\axioo\Documents\ITB - Informatika\Semester 4\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes2_MencariMaknaSpek\src\TreasureHunt\TreasureHunt\obj\Debug\TreasureHunt.exe
+C:\Users\axioo\Documents\ITB - Informatika\Semester 4\IF2211 Strategi Algoritma\Tugas Besar 2\Tubes2_MencariMaknaSpek\src\TreasureHunt\TreasureHunt\obj\Debug\TreasureHunt.pdb
