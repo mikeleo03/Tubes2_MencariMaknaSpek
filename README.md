@@ -9,4 +9,4 @@ Cara jalanin project yang udah dibikin :
 atauu kalo bingung buttonnya mana, bisa pake ```ctrl + F5```
 5. Udah :D harusnya keluar tampilan terminal
 
-Buat basicnya, itu mainnya nyobain bikin kalkulator sederhana gt, cobain aja
+*Kalo sebelumnya udah pull, tampilannya bakal beda karena ini udah yang GUI based*
