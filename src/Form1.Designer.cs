@@ -1,6 +1,6 @@
 ﻿namespace TreasureHunt
 {
-    partial class Form1
+    partial class TreasureFinder
     {
         /// <summary>
         /// Required designer variable.
@@ -28,10 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // TreasureFinder
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.BackColor = System.Drawing.Color.LightBlue;
+            this.ClientSize = new System.Drawing.Size(1902, 1033);
+            this.Name = "TreasureFinder";
+            this.Text = "TreasureFinder";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
