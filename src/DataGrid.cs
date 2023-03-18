@@ -39,7 +39,7 @@ namespace TreasureHunt {
 
         private static void AddColumnToTable(string[] columnCollection, char delimiter, ref DataTable dt) {
             string[] columns = columnCollection[0].Split(delimiter); // collect data per column dipisah spasi
-            for(int i = 0; i < columnCollection.Length; i++) // setiap kolom diiterasi
+            for(int i = 0; i < columns.Length; i++) // setiap kolom diiterasi
             {
                 DataColumn dc = new DataColumn("", typeof(string)); // ini yang "" itu judul tiap kolom 
                 dt.Columns.Add(dc);
