@@ -83,46 +83,5 @@ namespace TreasureHunt.Container {
             }
             return lines;
         }
-
-        // expand coordinate with bfs rules
-        public Coordinate[] expandWithBFS(Coordinate test) {
-            Coordinate[] neighborNode = new Coordinate[0];
-            int count = 0;
-
-            if (isCoordinateValid(test.moveUp()) && isCoordinatePassable(test.moveUp())) {  // UP
-                Coordinate temp1 = test.moveUp();
-                neighborNode.Append(temp1);
-                count++;
-            }
-            if (isCoordinateValid(test.moveRight()) && isCoordinatePassable(test.moveRight())) {  // RIGHT
-                Coordinate temp2 = test.moveRight();
-                neighborNode.Append(temp2);
-                count++;
-            }
-            if (isCoordinateValid(test.moveDown()) && isCoordinatePassable(test.moveDown())) {  // DOWN
-                Coordinate temp3 = test.moveDown();
-                neighborNode.Append(temp3);
-                count++;
-            }
-            if (isCoordinateValid(test.moveLeft()) && isCoordinatePassable(test.moveLeft())) {  // LEFT
-                Coordinate temp4 = test.moveLeft();
-                neighborNode.Append(temp4);
-                count++;
-            }
-
-            if (count > 1) {
-                int times = 0;
-                foreach (Coordinate nodes in neighborNode) {
-                    int temp = this.map[nodes.getX(), nodes.getY()].getVisitedTime();
-                    if (times < temp) {
-                        times = temp;
-                    }
-                }
-
-                neighborNode = neighborNode.Where(nodes => this.map[nodes.getX(), nodes.getY()].getVisitedTime() > times).ToArray();
-            }
-            
-            return neighborNode;
-        }
     }
 }
