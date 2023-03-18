@@ -15,6 +15,8 @@ namespace TreasureHunt {
     public partial class TreasureFinder : Form {
         //public var fileContent = string.Empty;
         //public var filePath = string.Empty;
+        public string algorithm;
+        public bool browsed = false;
         private MatrixNode maze = new MatrixNode();
 
         public TreasureFinder() {
@@ -96,5 +98,54 @@ namespace TreasureHunt {
                 }
             }
         }
+        
+        private void label1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TreasureFinder_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Filename_iotbox_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void BFS_option_CheckedChanged(object sender, EventArgs e)
+        {
+            algorithm = "BFS";
+        }
+
+        private void DFS_option_CheckedChanged(object sender, EventArgs e)
+        {
+            algorithm = "DFS";
+        }
+
+        private void Search_Click(object sender, EventArgs e)
+        {
+            if (browsed)
+            {
+                if (algorithm == "BFS")
+                {
+
+                    Pick_algorithm_warning.Text = "";
+                    // algoritma BFS
+                }
+                else if (algorithm == "DFS")
+                {
+                    Pick_algorithm_warning.Text = "";
+                    // algoritma DFS
+                }
+                else
+                {
+                    algorithm = "";
+                    Pick_algorithm_warning.Text = "Pick the algorithm first!";
+                }
+            }
+        }
+    }
+}
     }
 }
