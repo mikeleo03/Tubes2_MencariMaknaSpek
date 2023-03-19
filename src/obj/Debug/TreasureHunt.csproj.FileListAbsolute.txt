@@ -30,3 +30,14 @@ C:\Users\user\Documents\Kuliah\Semester 4 Jurusan\Strategi Algoritma\Tubes2_Menc
 C:\Users\user\Documents\Kuliah\Semester 4 Jurusan\Strategi Algoritma\Tubes2_MencariMaknaSpek\src\bin\Debug\TreasureHunt.exe.config
 C:\Users\user\Documents\Kuliah\Semester 4 Jurusan\Strategi Algoritma\Tubes2_MencariMaknaSpek\src\bin\Debug\TreasureHunt.exe
 C:\Users\user\Documents\Kuliah\Semester 4 Jurusan\Strategi Algoritma\Tubes2_MencariMaknaSpek\src\bin\Debug\TreasureHunt.pdb
+C:\Users\Dave Bahana\Downloads\Tubes2_MencariMaknaSpek\src\obj\Debug\TreasureHunt.csproj.AssemblyReference.cache
+C:\Users\Dave Bahana\Downloads\Tubes2_MencariMaknaSpek\src\obj\Debug\TreasureHunt.csproj.SuggestedBindingRedirects.cache
+C:\Users\Dave Bahana\Downloads\Tubes2_MencariMaknaSpek\src\obj\Debug\TreasureHunt.TreasureFinder.resources
+C:\Users\Dave Bahana\Downloads\Tubes2_MencariMaknaSpek\src\obj\Debug\TreasureHunt.Properties.Resources.resources
+C:\Users\Dave Bahana\Downloads\Tubes2_MencariMaknaSpek\src\obj\Debug\TreasureHunt.csproj.GenerateResource.cache
+C:\Users\Dave Bahana\Downloads\Tubes2_MencariMaknaSpek\src\obj\Debug\TreasureHunt.csproj.CoreCompileInputs.cache
+C:\Users\Dave Bahana\Downloads\Tubes2_MencariMaknaSpek\src\obj\Debug\TreasureHunt.exe
+C:\Users\Dave Bahana\Downloads\Tubes2_MencariMaknaSpek\src\obj\Debug\TreasureHunt.pdb
+C:\Users\Dave Bahana\Downloads\Tubes2_MencariMaknaSpek\src\bin\Debug\TreasureHunt.exe.config
+C:\Users\Dave Bahana\Downloads\Tubes2_MencariMaknaSpek\src\bin\Debug\TreasureHunt.exe
+C:\Users\Dave Bahana\Downloads\Tubes2_MencariMaknaSpek\src\bin\Debug\TreasureHunt.pdb

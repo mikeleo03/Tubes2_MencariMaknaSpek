@@ -36,6 +36,12 @@
             this.browse_button = new System.Windows.Forms.Button();
             this.grid_hartakarun = new System.Windows.Forms.DataGridView();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.Algoritma_Label = new System.Windows.Forms.Label();
+            this.BFS_option = new System.Windows.Forms.RadioButton();
+            this.DFS_option = new System.Windows.Forms.RadioButton();
+            this.Pick_algorithm_warning = new System.Windows.Forms.Label();
+            this.Search = new System.Windows.Forms.Button();
+            this.Line = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grid_hartakarun)).BeginInit();
             this.SuspendLayout();
             // 
@@ -99,7 +105,7 @@
             this.browse_button.Name = "browse_button";
             this.browse_button.Size = new System.Drawing.Size(75, 23);
             this.browse_button.TabIndex = 5;
-            this.browse_button.Text = "Search";
+            this.browse_button.Text = "Browse";
             this.browse_button.UseVisualStyleBackColor = true;
             this.browse_button.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -111,11 +117,10 @@
             this.grid_hartakarun.AllowUserToResizeColumns = false;
             this.grid_hartakarun.AllowUserToResizeRows = false;
             this.grid_hartakarun.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.grid_hartakarun.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
-            this.grid_hartakarun.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            this.grid_hartakarun.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grid_hartakarun.BackgroundColor = System.Drawing.Color.LightBlue;
-            this.grid_hartakarun.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.grid_hartakarun.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grid_hartakarun.ColumnHeadersHeight = 29;
+            this.grid_hartakarun.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.grid_hartakarun.ColumnHeadersVisible = false;
             this.grid_hartakarun.Enabled = false;
             this.grid_hartakarun.Location = new System.Drawing.Point(725, 219);
@@ -124,20 +129,91 @@
             this.grid_hartakarun.ReadOnly = true;
             this.grid_hartakarun.RowHeadersVisible = false;
             this.grid_hartakarun.RowHeadersWidth = 51;
+            this.grid_hartakarun.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grid_hartakarun.RowTemplate.Height = 24;
-            this.grid_hartakarun.Size = new System.Drawing.Size(559, 539);
+            this.grid_hartakarun.Size = new System.Drawing.Size(460, 453);
             this.grid_hartakarun.TabIndex = 6;
             // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // Algoritma_Label
+            // 
+            this.Algoritma_Label.AutoSize = true;
+            this.Algoritma_Label.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Algoritma_Label.Location = new System.Drawing.Point(89, 382);
+            this.Algoritma_Label.Name = "Algoritma_Label";
+            this.Algoritma_Label.Size = new System.Drawing.Size(159, 34);
+            this.Algoritma_Label.TabIndex = 7;
+            this.Algoritma_Label.Text = "Algoritma";
+            // 
+            // BFS_option
+            // 
+            this.BFS_option.AutoSize = true;
+            this.BFS_option.Location = new System.Drawing.Point(95, 436);
+            this.BFS_option.Name = "BFS_option";
+            this.BFS_option.Size = new System.Drawing.Size(54, 20);
+            this.BFS_option.TabIndex = 8;
+            this.BFS_option.TabStop = true;
+            this.BFS_option.Text = "BFS";
+            this.BFS_option.UseVisualStyleBackColor = true;
+            this.BFS_option.CheckedChanged += new System.EventHandler(this.BFS_option_CheckedChanged);
+            // 
+            // DFS_option
+            // 
+            this.DFS_option.AutoSize = true;
+            this.DFS_option.Location = new System.Drawing.Point(95, 462);
+            this.DFS_option.Name = "DFS_option";
+            this.DFS_option.Size = new System.Drawing.Size(55, 20);
+            this.DFS_option.TabIndex = 9;
+            this.DFS_option.TabStop = true;
+            this.DFS_option.Text = "DFS";
+            this.DFS_option.UseVisualStyleBackColor = true;
+            this.DFS_option.CheckedChanged += new System.EventHandler(this.DFS_option_CheckedChanged);
+            // 
+            // Pick_algorithm_warning
+            // 
+            this.Pick_algorithm_warning.AutoSize = true;
+            this.Pick_algorithm_warning.ForeColor = System.Drawing.Color.Red;
+            this.Pick_algorithm_warning.Location = new System.Drawing.Point(92, 495);
+            this.Pick_algorithm_warning.Name = "Pick_algorithm_warning";
+            this.Pick_algorithm_warning.Size = new System.Drawing.Size(49, 16);
+            this.Pick_algorithm_warning.TabIndex = 10;
+            this.Pick_algorithm_warning.Text = "              ";
+            // 
+            // Search
+            // 
+            this.Search.Location = new System.Drawing.Point(917, 696);
+            this.Search.Name = "Search";
+            this.Search.Size = new System.Drawing.Size(75, 23);
+            this.Search.TabIndex = 11;
+            this.Search.Text = "Search";
+            this.Search.UseVisualStyleBackColor = true;
+            this.Search.Click += new System.EventHandler(this.Search_Click_1);
+            // 
+            // Line
+            // 
+            this.Line.BackColor = System.Drawing.Color.Black;
+            this.Line.Location = new System.Drawing.Point(17, 78);
+            this.Line.Name = "Line";
+            this.Line.Size = new System.Drawing.Size(1379, 2);
+            this.Line.TabIndex = 7;
+            this.Line.Text = " \r\n";
+            // 
             // TreasureFinder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.LightBlue;
             this.ClientSize = new System.Drawing.Size(1418, 1033);
+            this.Controls.Add(this.Line);
+            this.Controls.Add(this.Search);
+            this.Controls.Add(this.Pick_algorithm_warning);
+            this.Controls.Add(this.DFS_option);
+            this.Controls.Add(this.BFS_option);
+            this.Controls.Add(this.Algoritma_Label);
             this.Controls.Add(this.grid_hartakarun);
             this.Controls.Add(this.browse_button);
             this.Controls.Add(this.Filename_iotbox);
@@ -163,6 +239,12 @@
         private System.Windows.Forms.Button browse_button;
         private System.Windows.Forms.DataGridView grid_hartakarun;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Label Algoritma_Label;
+        private System.Windows.Forms.RadioButton BFS_option;
+        private System.Windows.Forms.RadioButton DFS_option;
+        private System.Windows.Forms.Label Pick_algorithm_warning;
+        private System.Windows.Forms.Button Search;
+        private System.Windows.Forms.Label Line;
     }
 }
 

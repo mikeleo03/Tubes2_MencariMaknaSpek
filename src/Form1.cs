@@ -11,8 +11,10 @@ using System.IO;
 using System.Drawing.Drawing2D;
 using TreasureHunt.Container;
 
-namespace TreasureHunt {
-    public partial class TreasureFinder : Form {
+namespace TreasureHunt 
+{
+    public partial class TreasureFinder : Form 
+    {
         //public var fileContent = string.Empty;
         //public var filePath = string.Empty;
         public string algorithm;
@@ -70,6 +72,7 @@ namespace TreasureHunt {
                 foreach (DataGridViewRow row in grid_hartakarun.Rows) {
                     row.Height = tinggi;
                 }
+                browsed = true;
             }
 
         }
@@ -98,32 +101,39 @@ namespace TreasureHunt {
                 }
             }
         }
-        
-        private void label1_Click_1(object sender, EventArgs e)
+        private void grid_hartakarun_DFS(object sender, DataGridViewCellFormattingEventArgs e)
         {
+            for (int i = 0; i < 3; i++)
+            {
+                DataGridViewRow row = grid_hartakarun.Rows[i];
+                for (int j = 0; j < 3; j++)
+                {
+                    if (j == 0)
+                    {
+                        System.Threading.Thread.Sleep(100);
+                        row.Cells[j].Style.BackColor = Color.Red;
+                        row.Cells[j].Style.ForeColor = Color.Red;
+                    }
 
+                    else if (j == 1)
+                    {
+                        System.Threading.Thread.Sleep(100);
+                        row.Cells[j].Style.BackColor = Color.Blue;
+                        row.Cells[j].Style.ForeColor = Color.Blue;
+                    }
+                    else if (j == 2)
+                    {
+                        System.Threading.Thread.Sleep(100);
+                        row.Cells[j].Style.BackColor = Color.Green;
+                        row.Cells[j].Style.ForeColor = Color.Green;
+                    }
+                }
+            }
         }
 
-        private void TreasureFinder_Load(object sender, EventArgs e)
-        {
+     
 
-        }
-
-        private void Filename_iotbox_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void BFS_option_CheckedChanged(object sender, EventArgs e)
-        {
-            algorithm = "BFS";
-        }
-
-        private void DFS_option_CheckedChanged(object sender, EventArgs e)
-        {
-            algorithm = "DFS";
-        }
-
-        private void Search_Click(object sender, EventArgs e)
+        private void Search_Click_1(object sender, EventArgs e)
         {
             if (browsed)
             {
@@ -135,7 +145,8 @@ namespace TreasureHunt {
                 }
                 else if (algorithm == "DFS")
                 {
-                    Pick_algorithm_warning.Text = "";
+                    Pick_algorithm_warning.Text = "Im here!";
+                    grid_hartakarun.CellFormatting += grid_hartakarun_DFS;
                     // algoritma DFS
                 }
                 else
@@ -145,7 +156,15 @@ namespace TreasureHunt {
                 }
             }
         }
-    }
-}
+
+        private void BFS_option_CheckedChanged(object sender, EventArgs e)
+        {
+            algorithm = "BFS";
+        }
+
+        private void DFS_option_CheckedChanged(object sender, EventArgs e)
+        {
+            algorithm = "DFS";
+        }
     }
 }
