@@ -18,6 +18,7 @@ namespace TreasureHunt.Container {
         // constructor
         public MatrixNode() {
             this.map = new Node[0, 0];
+            this.start = new Coordinate();
             this.row = -1;
             this.col = -1;
             this.numOfTreasure = 0;
@@ -48,11 +49,14 @@ namespace TreasureHunt.Container {
 
         // check the condition of node locations
         public bool isCoordinateValid(Coordinate test) {
-            return test.getY() >= 0 && test.getY() <= this.row && test.getX() >= 0 && test.getX() <= this.col;
+            return test.getY() >= 0 && test.getY() < this.row && test.getX() >= 0 && test.getX() < this.col;
         }
 
         public bool isCoordinatePassable(Coordinate test) {
-            return this.map[test.getX(), test.getY()].getType() != 'X';
+            if (isCoordinateValid(test)) {
+                return this.map[test.getX(), test.getY()].getType() != 'X';
+            }
+            return false;
         }
 
         public bool isTreasure(Coordinate test) {

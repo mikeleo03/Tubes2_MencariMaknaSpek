@@ -21,6 +21,7 @@ namespace TreasureHunt.IO {
 
         // constructors
         public Parser() {
+            this.map = new Node[0,0];
             this.fileName = string.Empty;
             this.row = 0;
             this.col = 0;
@@ -32,6 +33,7 @@ namespace TreasureHunt.IO {
         } 
 
         public Parser(string fileName) {
+            this.map = new Node[0,0];
             this.fileName = fileName;
             this.row = 1;
             this.col = 1;
