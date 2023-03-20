@@ -24,7 +24,7 @@ namespace TreasureHunt
         public TreasureFinder() {
             InitializeComponent();
             // grid_hartakarun.RowPostPaint += new DataGridViewRowPostPaintEventHandler(grid_hartakarun_RowPostPaint);
-            grid_hartakarun.CellFormatting += grid_hartakarun_CellFormatting;
+            // grid_hartakarun.CellFormatting += grid_hartakarun_CellFormatting;
         }
 
         private void label1_Click(object sender, EventArgs e) // Title Label
