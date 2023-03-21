@@ -15,15 +15,29 @@ namespace TreasureHunt.Container {
         // public section
         // constructor
         public Route() {
-            this.routes = new List<Coordinate>();
-            this.visitedTreasure = new List<Coordinate>();
             this.numsTreasure = 0;
             this.length = 0;
+            this.routes = new List<Coordinate>();
+            this.visitedTreasure = new List<Coordinate>();
         }
 
         // getter
         public int getNumsTreasure() {
             return this.numsTreasure;
+        }
+        
+        public void addNumsTreasure(Coordinate treasurePoint) {
+            this.numsTreasure++;
+            this.visitedTreasure.Add(treasurePoint);
+        }
+
+        public bool isTreasureVisited(Coordinate treasurePoint) {
+            for (int i = 0; i < this.visitedTreasure.Count; i++) {
+                if (this.visitedTreasure[i].getX() == treasurePoint.getX() && this.visitedTreasure[i].getY() == treasurePoint.getY()) {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public int getRouteLength() {
@@ -42,19 +56,8 @@ namespace TreasureHunt.Container {
             return this.routes[this.length - 1];
         }
 
-        // methods
-        public void addNumsTreasure(Coordinate treasurePoint) {
-            this.numsTreasure++;
-            this.visitedTreasure.Add(treasurePoint);
-        }
-
-        public bool isTreasureVisited(Coordinate treasurePoint) {
-            for (int i = 0; i < this.visitedTreasure.Count; i++) {
-                if (this.visitedTreasure[i].getX() == treasurePoint.getX() && this.visitedTreasure[i].getY() == treasurePoint.getY()) {
-                    return true;
-                }
-            }
-            return false;
+        public List<Coordinate> getRoutes() {
+            return this.routes;
         }
 
         public void addElement(Coordinate coord) {
@@ -75,6 +78,22 @@ namespace TreasureHunt.Container {
             }
         }
 
+        public List<String> getSequenceOfDirection() {
+            List<String> sequence = new List<String>();
+            for (int i = 0; i < getRouteLength() - 1; i++) {
+                if (this.routes[i+1].getX() > this.routes[i].getX()) {
+                    sequence.Add("D");
+                } else if (this.routes[i+1].getX() < this.routes[i].getX()) {
+                    sequence.Add("U");
+                } else if (this.routes[i+1].getY() > this.routes[i].getY()) {
+                    sequence.Add("R");
+                } else {
+                    sequence.Add("L");
+                }
+            }
+            return sequence;
+        }
+        
         public void printPath() {
             for (int i = 0; i < getRouteLength(); i++) {
                 Console.WriteLine($"pathhh: \t({routes[i].getX()}, {routes[i].getY()}) -");

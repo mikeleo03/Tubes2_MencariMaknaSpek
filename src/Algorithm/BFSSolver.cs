@@ -11,18 +11,24 @@ namespace TreasureHunt.Algorithm {
         private MatrixNode maze;
         private Coordinate currentLoc;
         private Queue<Route> queueRoute;
+        private Route finalRoute;
+        private List<Route> sequenceOfRoute;
 
         // constructor
         public BFSSolver() {
             this.maze = new MatrixNode();
             this.currentLoc = new Coordinate();
             this.queueRoute = new Queue<Route>();
+            this.finalRoute = new Route();
+            this.sequenceOfRoute = new List<Route>();
         }
 
         public BFSSolver(MatrixNode maze) {
             this.maze = maze;
             this.currentLoc = maze.getStart();
             this.queueRoute = new Queue<Route>();
+            this.finalRoute = new Route();
+            this.sequenceOfRoute = new List<Route>();
         }
 
         // expand coordinate with bfs rules
@@ -32,29 +38,37 @@ namespace TreasureHunt.Algorithm {
             int count = 0;
             
             // Validate expand paths
-            if (this.maze.isCoordinatePassable(this.currentLoc.moveUp())) {  // UP
-                Coordinate temp1 = this.currentLoc.moveUp();
-                neighborNode.Add(temp1);
-                visitList.Add(this.maze.getVisitedTime(this.currentLoc.moveUp()));
-                count++;
+            if (this.maze.isCoordinateValid(this.currentLoc.moveUp())) {  // UP
+                if (this.maze.isCoordinatePassable(this.currentLoc.moveUp())) {
+                    Coordinate temp1 = this.currentLoc.moveUp();
+                    neighborNode.Add(temp1);
+                    visitList.Add(this.maze.getVisitedTime(this.currentLoc.moveUp()));
+                    count++;
+                }
             }
-            if (this.maze.isCoordinatePassable(this.currentLoc.moveRight())) {  // RIGHT
-                Coordinate temp2 = this.currentLoc.moveRight();
-                neighborNode.Add(temp2);
-                visitList.Add(this.maze.getVisitedTime(this.currentLoc.moveRight()));
-                count++;
+            if (this.maze.isCoordinateValid(this.currentLoc.moveLeft())) {  // LEFT
+                if (this.maze.isCoordinatePassable(this.currentLoc.moveLeft())) {
+                    Coordinate temp4 = this.currentLoc.moveLeft();
+                    neighborNode.Add(temp4);
+                    visitList.Add(this.maze.getVisitedTime(this.currentLoc.moveLeft()));
+                    count++;
+                }
             }
-            if (this.maze.isCoordinatePassable(this.currentLoc.moveDown())) {  // DOWN
-                Coordinate temp3 = this.currentLoc.moveDown();
-                neighborNode.Add(temp3);
-                visitList.Add(this.maze.getVisitedTime(this.currentLoc.moveDown()));
-                count++;
+            if (this.maze.isCoordinateValid(this.currentLoc.moveDown())) {  // DOWN
+                if (this.maze.isCoordinatePassable(this.currentLoc.moveDown())) {
+                    Coordinate temp3 = this.currentLoc.moveDown();
+                    neighborNode.Add(temp3);
+                    visitList.Add(this.maze.getVisitedTime(this.currentLoc.moveDown()));
+                    count++;
+                }
             }
-            if (this.maze.isCoordinatePassable(this.currentLoc.moveLeft())) {  // LEFT
-                Coordinate temp4 = this.currentLoc.moveLeft();
-                neighborNode.Add(temp4);
-                visitList.Add(this.maze.getVisitedTime(this.currentLoc.moveLeft()));
-                count++;
+            if (this.maze.isCoordinateValid(this.currentLoc.moveRight())) {  // RIGHT
+                if (this.maze.isCoordinatePassable(this.currentLoc.moveRight())) {
+                    Coordinate temp2 = this.currentLoc.moveRight();
+                    neighborNode.Add(temp2);
+                    visitList.Add(this.maze.getVisitedTime(this.currentLoc.moveRight()));
+                    count++;
+                }
             }
 
             // If tovisit more than 1, then filters by order less-visited
@@ -80,7 +94,6 @@ namespace TreasureHunt.Algorithm {
                     }
                 }
             }
-
             return neighborNode;
         }
 
@@ -89,6 +102,7 @@ namespace TreasureHunt.Algorithm {
             foreach (Route routes in this.queueRoute) {
                 if (routes.getNumsTreasure() == this.maze.getTreasure()) {
                     temp = true;
+                    this.finalRoute.copyRoute(routes);
                     break;
                 }
             }
@@ -100,6 +114,7 @@ namespace TreasureHunt.Algorithm {
             initial_route.addElement(this.currentLoc);
             this.maze.visitCoordinate(this.currentLoc);
             this.queueRoute.Enqueue(initial_route);
+            this.sequenceOfRoute.Add(initial_route);
             
             // while not node
             while (!isSearchDone()) {
@@ -116,6 +131,7 @@ namespace TreasureHunt.Algorithm {
                     this.maze.visitCoordinate(this.currentLoc);
                     tempRoute.addElement(this.currentLoc);
                     this.queueRoute.Enqueue(tempRoute);
+                    this.sequenceOfRoute.Add(tempRoute);
                 }
             }
         }
