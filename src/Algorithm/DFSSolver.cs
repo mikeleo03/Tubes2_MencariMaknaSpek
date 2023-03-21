@@ -21,6 +21,14 @@ namespace TreasureHunt.Algorithm {
             this.route = new Coordinate[0];
             this.treasureCollected = 0;
         }
+        // ini gw tambahin sori
+        public DFSSolver(MatrixNode maze)
+        {
+            this.maze = maze;
+            this.currentLoc = new Coordinate();
+            this.route = new Coordinate[0];
+            this.treasureCollected = 0;
+        }
 
         // getter
         public Coordinate[] getRoute() {

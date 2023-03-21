@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Drawing2D;
 using TreasureHunt.Container;
+using TreasureHunt.Algorithm;
 
 namespace TreasureHunt 
 {
@@ -17,8 +18,10 @@ namespace TreasureHunt
     {
         //public var fileContent = string.Empty;
         //public var filePath = string.Empty;
-        public string algorithm;
-        public bool browsed = false;
+        private string algorithm;
+        private bool browsed = false;
+        private bool BFS_solved = false;
+        private bool DFS_solved = false;
         private MatrixNode maze = new MatrixNode();
 
         public TreasureFinder() {
@@ -73,6 +76,11 @@ namespace TreasureHunt
                     row.Height = tinggi;
                 }
                 browsed = true;
+                if (grid_hartakarun.SelectedCells.Count > 0)
+                {
+                    // Clear the selection
+                    grid_hartakarun.ClearSelection();
+                }
             }
 
         }
@@ -85,52 +93,57 @@ namespace TreasureHunt
                         if (Convert.ToString(row.Cells[i].Value) == "X") {
                             row.Cells[i].Style.BackColor = Color.Black;
                             row.Cells[i].Style.ForeColor = Color.Black;
+                            row.Cells[i].Value = "";
                         } else if (Convert.ToString(row.Cells[i].Value) == "K") {
-                            //row.Cells[i].Style.BackColor = Color.Yellow;
                             row.Cells[i].Style.BackColor = Color.White;
-                           // row.Cells[i].Value = "Start";
+                            row.Cells[i].Style.ForeColor = Color.Black;
+                            row.Cells[i].Value = "Start";
                         } else if (Convert.ToString(row.Cells[i].Value) == "R") {
                             row.Cells[i].Style.ForeColor = Color.White;
                             row.Cells[i].Style.BackColor = Color.White;
+                            row.Cells[i].Value = "";
                         } else if (Convert.ToString(row.Cells[i].Value) == "T") {
                             row.Cells[i].Style.BackColor = Color.White;
                             row.Cells[i].Style.ForeColor = Color.Black;
-                            //row.Cells[i].Value = "Treassure";
+                            row.Cells[i].Value = "Treassure";
                         }
                     }
                 }
             }
         }
-        private void grid_hartakarun_DFS(object sender, DataGridViewCellFormattingEventArgs e)
+        private async void BFS_Algo()
         {
-            for (int i = 0; i < 3; i++)
+            BFSSolver TestBFS = new BFSSolver(this.maze);
+            TestBFS.solve();
+            foreach (Route x in TestBFS.getSequence())
             {
-                DataGridViewRow row = grid_hartakarun.Rows[i];
-                for (int j = 0; j < 3; j++)
+                foreach (Coordinate y in x.getRoutes())
                 {
-                    if (j == 0)
-                    {
-                        System.Threading.Thread.Sleep(100);
-                        row.Cells[j].Style.BackColor = Color.Red;
-                        row.Cells[j].Style.ForeColor = Color.Red;
-                    }
+                    // without IF conditions yet.
+                    grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.Blue;
+                    grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.ForeColor = Color.Blue;
+                    await Task.Delay(1000);
+                    grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.Green;
+                    grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.ForeColor = Color.Green;
 
-                    else if (j == 1)
-                    {
-                        System.Threading.Thread.Sleep(100);
-                        row.Cells[j].Style.BackColor = Color.Blue;
-                        row.Cells[j].Style.ForeColor = Color.Blue;
-                    }
-                    else if (j == 2)
-                    {
-                        System.Threading.Thread.Sleep(100);
-                        row.Cells[j].Style.BackColor = Color.Green;
-                        row.Cells[j].Style.ForeColor = Color.Green;
-                    }
                 }
             }
         }
 
+        private async void DFS_Algo()
+        {
+            DFSSolver TestDFS = new DFSSolver(this.maze);
+            TestDFS.solve();
+            foreach(Coordinate x in TestDFS.getRoute())
+            {
+                grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Blue;
+                grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Blue;
+                await Task.Delay(1000);
+                grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Green;
+                grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Green;
+            }
+            await Task.Delay(1000);
+        }
      
 
         private void Search_Click_1(object sender, EventArgs e)
@@ -141,12 +154,15 @@ namespace TreasureHunt
                 {
 
                     Pick_algorithm_warning.Text = "";
+                    BFS_Algo();
+                    BFS_solved = true;
                     // algoritma BFS
                 }
                 else if (algorithm == "DFS")
                 {
-                    Pick_algorithm_warning.Text = "Im here!";
-                    grid_hartakarun.CellFormatting += grid_hartakarun_DFS;
+                    Pick_algorithm_warning.Text = "";
+                    DFS_Algo();
+                    DFS_solved = true;
                     // algoritma DFS
                 }
                 else
@@ -154,6 +170,10 @@ namespace TreasureHunt
                     algorithm = "";
                     Pick_algorithm_warning.Text = "Pick the algorithm first!";
                 }
+            }
+            else
+            {
+
             }
         }
 
@@ -165,6 +185,11 @@ namespace TreasureHunt
         private void DFS_option_CheckedChanged(object sender, EventArgs e)
         {
             algorithm = "DFS";
+        }
+
+        private void Visualize_Button_Click(object sender, EventArgs e)
+        {
+            // ini nanti dipisah
         }
     }
 }
