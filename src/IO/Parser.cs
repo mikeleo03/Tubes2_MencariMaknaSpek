@@ -106,7 +106,12 @@ namespace TreasureHunt.IO {
                 foreach (string character in temp) {
                     checkCharacterValidity(character);
                     processCharacter(character[0]);
-                    this.map[i, j] = new Node(character[0], this.i, this.j, 0);
+                    if (character[0] != 'X') {
+                        this.map[i, j] = new Node(character[0], this.i, this.j, 0);
+                    }
+                    else {
+                        this.map[i, j] = new Node(character[0], this.i, this.j, -1);
+                    }
                     this.j++;
                 }
                 this.i++;

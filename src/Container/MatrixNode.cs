@@ -49,14 +49,11 @@ namespace TreasureHunt.Container {
 
         // check the condition of node locations
         public bool isCoordinateValid(Coordinate test) {
-            return test.getY() >= 0 && test.getY() < this.row && test.getX() >= 0 && test.getX() < this.col;
+            return test.getX() >= 0 && test.getX() < this.row && test.getY() >= 0 && test.getY() < this.col;
         }
 
         public bool isCoordinatePassable(Coordinate test) {
-            if (isCoordinateValid(test)) {
-                return this.map[test.getX(), test.getY()].getType() != 'X';
-            }
-            return false;
+            return this.map[test.getX(), test.getY()].getType() != 'X';
         }
 
         public bool isTreasure(Coordinate test) {

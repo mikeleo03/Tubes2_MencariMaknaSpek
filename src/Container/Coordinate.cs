@@ -32,19 +32,19 @@ namespace TreasureHunt.Container {
 
         // method to move point
         public Coordinate moveUp() {
-            return new Coordinate(this.x, this.y-1);
-        }
-
-        public Coordinate moveDown() {
-            return new Coordinate(this.x, this.y+1);
-        }
-
-        public Coordinate moveLeft() {
             return new Coordinate(this.x-1, this.y);
         }
 
-        public Coordinate moveRight() {
+        public Coordinate moveDown() {
             return new Coordinate(this.x+1, this.y);
+        }
+
+        public Coordinate moveLeft() {
+            return new Coordinate(this.x, this.y-1);
+        }
+
+        public Coordinate moveRight() {
+            return new Coordinate(this.x, this.y+1);
         }
     }
 }
