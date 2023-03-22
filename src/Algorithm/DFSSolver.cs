@@ -21,7 +21,6 @@ namespace TreasureHunt.Algorithm {
             this.route = new Coordinate[0];
             this.treasureCollected = 0;
         }
-
         // getter
         public Coordinate[] getRoute() {
             return this.route;

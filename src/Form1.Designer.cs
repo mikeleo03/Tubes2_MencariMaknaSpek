@@ -47,7 +47,7 @@
             this.No_TSP_RadioButon = new System.Windows.Forms.RadioButton();
             this.Yes_TSP_RadioButton = new System.Windows.Forms.RadioButton();
             this.Visualize_Button = new System.Windows.Forms.Button();
-            this.label2 = new System.Windows.Forms.Label();
+            this.Browse_file_warning = new System.Windows.Forms.Label();
             this.Line2 = new System.Windows.Forms.Label();
             this.Route_Label = new System.Windows.Forms.Label();
             this.Steps_Label = new System.Windows.Forms.Label();
@@ -265,15 +265,15 @@
             this.Visualize_Button.UseVisualStyleBackColor = true;
             this.Visualize_Button.Click += new System.EventHandler(this.Visualize_Button_Click);
             // 
-            // label2
+            // Browse_file_warning
             // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(89, 344);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(37, 16);
-            this.label2.TabIndex = 17;
-            this.label2.Text = "          ";
+            this.Browse_file_warning.AutoSize = true;
+            this.Browse_file_warning.ForeColor = System.Drawing.Color.Red;
+            this.Browse_file_warning.Location = new System.Drawing.Point(89, 344);
+            this.Browse_file_warning.Name = "Browse_file_warning";
+            this.Browse_file_warning.Size = new System.Drawing.Size(37, 16);
+            this.Browse_file_warning.TabIndex = 17;
+            this.Browse_file_warning.Text = "          ";
             // 
             // Line2
             // 
@@ -343,7 +343,7 @@
             this.Controls.Add(this.Steps_Label);
             this.Controls.Add(this.Route_Label);
             this.Controls.Add(this.Line2);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.Browse_file_warning);
             this.Controls.Add(this.Visualize_Button);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.No_TSP_RadioButon);
@@ -392,7 +392,7 @@
         private System.Windows.Forms.RadioButton No_TSP_RadioButon;
         private System.Windows.Forms.RadioButton Yes_TSP_RadioButton;
         private System.Windows.Forms.Button Visualize_Button;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label Browse_file_warning;
         private System.Windows.Forms.Label Line2;
         private System.Windows.Forms.Label Route_Label;
         private System.Windows.Forms.Label Steps_Label;

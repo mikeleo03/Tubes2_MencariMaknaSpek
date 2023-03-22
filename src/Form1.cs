@@ -142,7 +142,7 @@ namespace TreasureHunt
                 }
                 grid_hartakarun.Rows[x.getRoutesTopX()].Cells[x.getRoutesTopY()].Style.BackColor = Color.Blue;
                 grid_hartakarun.Rows[x.getRoutesTopX()].Cells[x.getRoutesTopY()].Style.ForeColor = Color.Blue;
-                await Task.Delay(1000);
+                await Task.Delay(100);
                 // reset every route on the way
                 foreach (Coordinate z in x.getRoutes())
                 {
@@ -244,13 +244,15 @@ namespace TreasureHunt
         {
             if (browsed)
             {
+                Browse_file_warning.Text = "";
                 if (algorithm == "BFS")
                 {
-
+                    //delete bfs_sol;
                     Pick_algorithm_warning.Text = "";
                     bfs_sol = new BFSSolver(this.maze);
                     bfs_sol.solve();
                     BFS_solved = true;
+                    DFS_solved = false;
                     // algoritma BFS
                 }
                 else if (algorithm == "DFS")
@@ -260,6 +262,7 @@ namespace TreasureHunt
                     dfs_sol.fillMaze(fileName);
                     dfs_sol.solve();
                     DFS_solved = true;
+                    BFS_solved = false;
                     // algoritma DFS
                 }
                 else
@@ -270,7 +273,7 @@ namespace TreasureHunt
             }
             else
             {
-
+                Browse_file_warning.Text = "Choose a txt file first!";
             }
         }
 
@@ -291,11 +294,13 @@ namespace TreasureHunt
             {
                 Visualize_Warning.Text = "";
                 BFS_Algo();
+                BFS_solved = false;
             }
             else if (DFS_solved)
             {
                 Visualize_Warning.Text = "";
                 DFS_Algo();
+                DFS_solved = false;
             }
             else
             {
