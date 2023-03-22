@@ -21,14 +21,6 @@ namespace TreasureHunt.Algorithm {
             this.route = new Coordinate[0];
             this.treasureCollected = 0;
         }
-        // ini gw tambahin sori
-        public DFSSolver(MatrixNode maze)
-        {
-            this.maze = maze;
-            this.currentLoc = new Coordinate();
-            this.route = new Coordinate[0];
-            this.treasureCollected = 0;
-        }
 
         // getter
         public Coordinate[] getRoute() {
@@ -43,71 +35,165 @@ namespace TreasureHunt.Algorithm {
 
         // expand current location to the next location 
         // because the node can be visited again, there is no backtracking can be done with dfs
-        public bool[] checkNeighbourNode() {
-            bool[] neighbourNode = {false, false, false, false};
+        public bool[] checkNeighbourNode(int flag) {
+            if (flag == 0)
+            {
+                bool[] neighbourNode = { false, false, false, false };
 
-            if (this.maze.isCoordinateValid(this.currentLoc.moveUp())) {
-                neighbourNode[0] = this.maze.isCoordinatePassable(this.currentLoc.moveUp());
-            }
-            if (this.maze.isCoordinateValid(this.currentLoc.moveLeft())) {
-                neighbourNode[1] = this.maze.isCoordinatePassable(this.currentLoc.moveLeft());
-            }
-            if (this.maze.isCoordinateValid(this.currentLoc.moveDown())) {
-                neighbourNode[2] = this.maze.isCoordinatePassable(this.currentLoc.moveDown());
-            }
-            if (this.maze.isCoordinateValid(this.currentLoc.moveRight())) {
-                neighbourNode[3] = this.maze.isCoordinatePassable(this.currentLoc.moveRight());
-            }
+                if (this.maze.isCoordinateValid(this.currentLoc.moveUp()))
+                {
+                    neighbourNode[0] = this.maze.isCoordinatePassable(this.currentLoc.moveUp());
+                }
+                if (this.maze.isCoordinateValid(this.currentLoc.moveLeft()))
+                {
+                    neighbourNode[1] = this.maze.isCoordinatePassable(this.currentLoc.moveLeft());
+                }
+                if (this.maze.isCoordinateValid(this.currentLoc.moveDown()))
+                {
+                    neighbourNode[2] = this.maze.isCoordinatePassable(this.currentLoc.moveDown());
+                }
+                if (this.maze.isCoordinateValid(this.currentLoc.moveRight()))
+                {
+                    neighbourNode[3] = this.maze.isCoordinatePassable(this.currentLoc.moveRight());
+                }
 
-            return neighbourNode;
+                return neighbourNode;
+            }
+            else
+            {
+                bool[] neighbourNode = { false, false, false, false };
+
+                if (this.maze.isCoordinateValid(this.currentLoc.moveRight()))
+                {
+                    neighbourNode[0] = this.maze.isCoordinatePassable(this.currentLoc.moveRight());
+                }
+                if (this.maze.isCoordinateValid(this.currentLoc.moveDown()))
+                {
+                    neighbourNode[1] = this.maze.isCoordinatePassable(this.currentLoc.moveDown());
+                }
+                if (this.maze.isCoordinateValid(this.currentLoc.moveLeft()))
+                {
+                    neighbourNode[2] = this.maze.isCoordinatePassable(this.currentLoc.moveLeft());
+                }
+                if (this.maze.isCoordinateValid(this.currentLoc.moveUp()))
+                {
+                    neighbourNode[3] = this.maze.isCoordinatePassable(this.currentLoc.moveUp());
+                }
+
+                return neighbourNode;
+            }
         }
 
-        public int[] checkNeighbourNodeVisits(bool[] visitable) {
-            int[] visitList = {-1, -1, -1, -1};
+        public int[] checkNeighbourNodeVisits(int flag, bool[] visitable) {
+            if (flag == 0)
+            {
+                int[] visitList = { -1, -1, -1, -1 };
 
-            visitList[0] = visitable[0] ? this.maze.getVisitedTime(this.currentLoc.moveUp()) : -1;
-            visitList[1] = visitable[1] ? this.maze.getVisitedTime(this.currentLoc.moveLeft()) : -1;
-            visitList[2] = visitable[2] ? this.maze.getVisitedTime(this.currentLoc.moveDown()) : -1;
-            visitList[3] = visitable[3] ? this.maze.getVisitedTime(this.currentLoc.moveRight()) : -1;
+                visitList[0] = visitable[0] ? this.maze.getVisitedTime(this.currentLoc.moveUp()) : -1;
+                visitList[1] = visitable[1] ? this.maze.getVisitedTime(this.currentLoc.moveLeft()) : -1;
+                visitList[2] = visitable[2] ? this.maze.getVisitedTime(this.currentLoc.moveDown()) : -1;
+                visitList[3] = visitable[3] ? this.maze.getVisitedTime(this.currentLoc.moveRight()) : -1;
 
-            return visitList;
+                return visitList;
+            }
+            else
+            {
+                int[] visitList = { -1, -1, -1, -1 };
+
+                visitList[0] = visitable[0] ? this.maze.getVisitedTime(this.currentLoc.moveRight()) : -1;
+                visitList[1] = visitable[1] ? this.maze.getVisitedTime(this.currentLoc.moveDown()) : -1;
+                visitList[2] = visitable[2] ? this.maze.getVisitedTime(this.currentLoc.moveLeft()) : -1;
+                visitList[3] = visitable[3] ? this.maze.getVisitedTime(this.currentLoc.moveUp()) : -1;
+
+                return visitList;
+            }
         }
 
-        public Coordinate expandWithDFS() {
-            Coordinate[] neighbour = { this.currentLoc.moveUp(), this.currentLoc.moveLeft(), this.currentLoc.moveDown(), this.currentLoc.moveRight() };
+        public Coordinate expandWithDFS(int flag) {
+            if (flag == 0)
+            {
+                Coordinate[] neighbour = { this.currentLoc.moveUp(), this.currentLoc.moveLeft(), this.currentLoc.moveDown(), this.currentLoc.moveRight() };
 
-            bool[] visitable = checkNeighbourNode();
-            int[] visitList = checkNeighbourNodeVisits(visitable);
-            
-            int idx = 0;
-            for(int i = 1; i < 4; i++) {
-                if (visitList[idx] == -1) {
-                    idx = i;
+                bool[] visitable = checkNeighbourNode(flag);
+                int[] visitList = checkNeighbourNodeVisits(flag, visitable);
+
+                int idx = 0;
+                for (int i = 1; i < 4; i++)
+                {
+                    if (visitList[idx] == -1)
+                    {
+                        idx = i;
+                    }
+                    else
+                    {
+                        idx = visitList[i] < visitList[idx] && visitList[i] != -1 ? i : idx;
+                    }
                 }
-                else {
-                    idx = visitList[i] < visitList[idx] && visitList[i] != -1 ? i : idx;
-                }
+
+                return neighbour[idx];
             }
+            else
+            {
+                Coordinate[] neighbour = { this.currentLoc.moveRight(), this.currentLoc.moveDown(), this.currentLoc.moveLeft(), this.currentLoc.moveUp() };
 
-            return neighbour[idx];
+                bool[] visitable = checkNeighbourNode(flag);
+                int[] visitList = checkNeighbourNodeVisits(flag, visitable);
+
+                int idx = 0;
+                for (int i = 1; i < 4; i++)
+                {
+                    if (visitList[idx] == -1)
+                    {
+                        idx = i;
+                    }
+                    else
+                    {
+                        idx = visitList[i] < visitList[idx] && visitList[i] != -1 ? i : idx;
+                    }
+                }
+
+                return neighbour[idx];
+            }
         }
 
         // process the current location visited
-        public void visitCurrentLocation() {
-            if (this.maze.isTreasure(this.currentLoc) && !this.maze.isVisited(this.currentLoc)) {
-                this.treasureCollected++;
+        public void visitCurrentLocation(int flag) {
+            if (flag == 0)
+            {
+                if (this.maze.isTreasure(this.currentLoc) && !this.maze.isVisited(this.currentLoc))
+                {
+                    this.treasureCollected++;
+                }
             }
             this.maze.visitCoordinate(this.currentLoc);
         }
 
+        // solve the problem and get all treasure by using DFS algorithm
+        // in this problem, every node can be visited more than one time
+        // this result make DFS branching can go deeper and deeper without no possible move condition
+        // this render backtrack in DFS unused
         public void solve() {
-            visitCurrentLocation();
-            while (this.treasureCollected != this.maze.getTreasure()) {
+            visitCurrentLocation(0);
+            while (this.treasureCollected != this.maze.getTreasure()) 
+            {
                 this.route = this.route.Append(this.currentLoc).ToArray();
-                this.currentLoc = expandWithDFS();
-                visitCurrentLocation();
+                this.currentLoc = expandWithDFS(0);
+                visitCurrentLocation(0);
             }
             this.route = this.route.Append(this.currentLoc).ToArray();
+        }
+
+        // solve and find route to go back from current location after finding all treasure 
+        public void solveAndTSP() {
+            solve();
+            this.maze.clearVisits();
+            visitCurrentLocation(1);
+            while (this.currentLoc.getX() != this.maze.getStart().getX() && this.currentLoc.getY() != this.maze.getStart().getY())
+            {
+                this.currentLoc = expandWithDFS(1);
+                visitCurrentLocation(1);
+                this.route = this.route.Append(this.currentLoc).ToArray();
+            }
         }
 
         // transform the route found to sequence of direction

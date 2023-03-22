@@ -37,6 +37,17 @@ namespace TreasureHunt.Container {
             return this.map[test.getX(), test.getY()].getVisitedTime();
         }
 
+        // setter
+        public void clearVisits() {
+            for (int i = 0; i < this.row; i++) 
+            {
+                for (int j = 0; j < this.col; j++)
+                {
+                    this.map[i, j].reset();
+                }
+            }
+        }
+
         // fill the matrix
         public void fillMatrix(string fileName) {
             Parser parser = new Parser(fileName);

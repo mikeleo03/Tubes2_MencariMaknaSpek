@@ -34,6 +34,12 @@ namespace TreasureHunt.Container {
             return this.visitedTime;
         }
 
+        // setter
+        public void reset()
+        {
+            this.visitedTime = 0;
+        }
+
         // method to visit node
         public void visit() {
             this.visitedTime++;
