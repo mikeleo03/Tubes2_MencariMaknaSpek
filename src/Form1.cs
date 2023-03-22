@@ -19,11 +19,14 @@ namespace TreasureHunt
     {
         //public var fileContent = string.Empty;
         //public var filePath = string.Empty;
+        private string fileName;
         private string algorithm;
         private bool browsed = false;
         private bool BFS_solved = false;
         private bool DFS_solved = false;
         private MatrixNode maze = new MatrixNode();
+        private DFSSolver dfs_sol;
+        private BFSSolver bfs_sol;
 
         public TreasureFinder() {
             InitializeComponent();
@@ -67,6 +70,7 @@ namespace TreasureHunt
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK) {
                 Filename_iotbox.Text = openFileDialog1.FileName; // blm ada text box jadi g dulu
+                fileName = Filename_iotbox.Text;
                 DataGrid.file = Filename_iotbox.Text;
                 this.maze.fillMatrix(Filename_iotbox.Text);
                 grid_hartakarun.DataSource = DataGrid.DataTableFromTextFile(this.maze.convertToStringArray());
@@ -116,7 +120,7 @@ namespace TreasureHunt
         {
             BFSSolver TestBFS = new BFSSolver(this.maze);
             TestBFS.solve();
-            foreach (Route x in TestBFS.getSequence())
+            foreach (Route x in bfs_sol.getSequence())
             {
                 foreach (Coordinate y in x.getRoutes())
                 {
@@ -163,7 +167,7 @@ namespace TreasureHunt
                 grid_hartakarun.Rows[x.getRoutesTopX()].Cells[x.getRoutesTopY()].Style.ForeColor = Color.Blue;
                 await Task.Delay(1000);
             }*/
-            Route o = TestBFS.getFinal();
+            Route o = bfs_sol.getFinalRoute();
             foreach (Coordinate fin in o.getRoutes())
             {
                 grid_hartakarun.Rows[fin.getX()].Cells[fin.getY()].Style.BackColor = Color.GreenYellow;
@@ -173,9 +177,7 @@ namespace TreasureHunt
 
         private async void DFS_Algo()
         {
-            DFSSolver TestDFS = new DFSSolver(this.maze);
-            TestDFS.solve();
-            foreach (Coordinate x in TestDFS.getRoute())
+            foreach (Coordinate x in dfs_sol.getRoute())
             {
                 if (grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor == Color.White)
                 {
@@ -246,14 +248,17 @@ namespace TreasureHunt
                 {
 
                     Pick_algorithm_warning.Text = "";
-                    BFS_Algo();
+                    bfs_sol = new BFSSolver(this.maze);
+                    bfs_sol.solve();
                     BFS_solved = true;
                     // algoritma BFS
                 }
                 else if (algorithm == "DFS")
                 {
                     Pick_algorithm_warning.Text = "";
-                    DFS_Algo();
+                    dfs_sol = new DFSSolver();
+                    dfs_sol.fillMaze(fileName);
+                    dfs_sol.solve();
                     DFS_solved = true;
                     // algoritma DFS
                 }
@@ -282,6 +287,20 @@ namespace TreasureHunt
         private void Visualize_Button_Click(object sender, EventArgs e)
         {
             // ini nanti dipisah
+            if (BFS_solved)
+            {
+                Visualize_Warning.Text = "";
+                BFS_Algo();
+            }
+            else if (DFS_solved)
+            {
+                Visualize_Warning.Text = "";
+                DFS_Algo();
+            }
+            else
+            {
+                Visualize_Warning.Text = "Solve the chosen file!";
+            }
         }
     }
 }

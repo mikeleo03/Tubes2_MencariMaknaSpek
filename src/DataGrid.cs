@@ -13,18 +13,11 @@ namespace TreasureHunt {
     class DataGrid {
         public static string file;
         
-        // public static DataTable DataTableFromTextFile(string location, char delimiter = ' ')
-        // {
-        //     DataTable result;
-        //     string[] LineArray = File.ReadAllLines(location);
-        //     result = FromDataTable(LineArray, delimiter);
-        //     return result;
-
-        // }
         public static DataTable DataTableFromTextFile(string[] LineArray, char delimiter = ' ') {
-            DataTable result;
-            result = FromDataTable(LineArray, delimiter);
-            return result;
+            //DataTable result;
+            //result = FromDataTable(LineArray, delimiter);
+            //return result;
+            return FromDataTable(LineArray, delimiter);
 
         }
 
@@ -36,7 +29,6 @@ namespace TreasureHunt {
             return dt;
 
         }
-
         private static void AddColumnToTable(string[] columnCollection, char delimiter, ref DataTable dt) {
             string[] columns = columnCollection[0].Split(delimiter); // collect data per column dipisah spasi
             for(int i = 0; i < columns.Length; i++) // setiap kolom diiterasi

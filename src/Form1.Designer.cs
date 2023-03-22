@@ -53,6 +53,7 @@
             this.Steps_Label = new System.Windows.Forms.Label();
             this.Nodes_Label = new System.Windows.Forms.Label();
             this.ExT_Label = new System.Windows.Forms.Label();
+            this.Visualize_Warning = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grid_hartakarun)).BeginInit();
             this.SuspendLayout();
             // 
@@ -199,7 +200,7 @@
             this.Search.Name = "Search";
             this.Search.Size = new System.Drawing.Size(75, 23);
             this.Search.TabIndex = 11;
-            this.Search.Text = "Search";
+            this.Search.Text = "Solve";
             this.Search.UseVisualStyleBackColor = true;
             this.Search.Click += new System.EventHandler(this.Search_Click_1);
             // 
@@ -319,6 +320,16 @@
             this.ExT_Label.TabIndex = 22;
             this.ExT_Label.Text = "Execution Time    :";
             // 
+            // Visualize_Warning
+            // 
+            this.Visualize_Warning.AutoSize = true;
+            this.Visualize_Warning.ForeColor = System.Drawing.Color.Red;
+            this.Visualize_Warning.Location = new System.Drawing.Point(166, 738);
+            this.Visualize_Warning.Name = "Visualize_Warning";
+            this.Visualize_Warning.Size = new System.Drawing.Size(112, 16);
+            this.Visualize_Warning.TabIndex = 23;
+            this.Visualize_Warning.Text = "                                   ";
+            // 
             // TreasureFinder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -326,6 +337,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.LightBlue;
             this.ClientSize = new System.Drawing.Size(1641, 1033);
+            this.Controls.Add(this.Visualize_Warning);
             this.Controls.Add(this.ExT_Label);
             this.Controls.Add(this.Nodes_Label);
             this.Controls.Add(this.Steps_Label);
@@ -386,6 +398,7 @@
         private System.Windows.Forms.Label Steps_Label;
         private System.Windows.Forms.Label Nodes_Label;
         private System.Windows.Forms.Label ExT_Label;
+        private System.Windows.Forms.Label Visualize_Warning;
     }
 }
 
