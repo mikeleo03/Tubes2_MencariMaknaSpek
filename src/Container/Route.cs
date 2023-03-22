@@ -11,6 +11,7 @@ namespace TreasureHunt.Container {
         private List<Coordinate> visitedTreasure;
         private int numsTreasure;
         private int length;
+        private Coordinate currentCoordinate;
 
         // public section
         // constructor
@@ -19,11 +20,16 @@ namespace TreasureHunt.Container {
             this.length = 0;
             this.routes = new List<Coordinate>();
             this.visitedTreasure = new List<Coordinate>();
+            this.currentCoordinate = new Coordinate();
         }
 
         // getter
         public int getNumsTreasure() {
             return this.numsTreasure;
+        }
+
+        public Coordinate getCurrentCoordinate() {
+            return this.currentCoordinate;
         }
         
         public void addNumsTreasure(Coordinate treasurePoint) {
@@ -62,6 +68,7 @@ namespace TreasureHunt.Container {
 
         public void addElement(Coordinate coord) {
             this.routes.Add(coord);
+            this.currentCoordinate = coord;
             this.length++;
         }
 
@@ -76,6 +83,7 @@ namespace TreasureHunt.Container {
             for (int i = 0; i < oldRoutes.visitedTreasure.Count; i++) {
                 this.visitedTreasure.Add(oldRoutes.visitedTreasure[i]);
             }
+            this.currentCoordinate = oldRoutes.getCurrentCoordinate();
         }
 
         public List<String> getSequenceOfDirection() {
