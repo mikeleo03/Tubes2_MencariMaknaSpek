@@ -11,6 +11,7 @@ using System.IO;
 using System.Drawing.Drawing2D;
 using TreasureHunt.Container;
 using TreasureHunt.Algorithm;
+using System.Threading;
 
 namespace TreasureHunt 
 {
@@ -119,14 +120,54 @@ namespace TreasureHunt
             {
                 foreach (Coordinate y in x.getRoutes())
                 {
+                    //grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.Blue;
+                    //grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.ForeColor = Color.Blue;
+                    // await Task.Delay(1000);
                     // without IF conditions yet.
-                    grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.Blue;
-                    grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.ForeColor = Color.Blue;
-                    await Task.Delay(1000);
-                    grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.Green;
-                    grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.ForeColor = Color.Green;
+                    if (grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor == Color.White)
+                    {
+                        grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.GreenYellow;
+                        grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.ForeColor = Color.GreenYellow;
+                    }
+                    else if (grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor == Color.White)
+                    {
+                        grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.GreenYellow;
+                        grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.ForeColor = Color.GreenYellow;
+                    }
 
                 }
+                grid_hartakarun.Rows[x.getRoutesTopX()].Cells[x.getRoutesTopY()].Style.BackColor = Color.Blue;
+                grid_hartakarun.Rows[x.getRoutesTopX()].Cells[x.getRoutesTopY()].Style.ForeColor = Color.Blue;
+                await Task.Delay(1000);
+                // reset every route on the way
+                foreach (Coordinate z in x.getRoutes())
+                {
+                    grid_hartakarun.Rows[z.getX()].Cells[z.getY()].Style.BackColor = Color.White;
+                    grid_hartakarun.Rows[z.getX()].Cells[z.getY()].Style.ForeColor = Color.White;
+                }
+            }
+            // Ini variasi reset all
+            /*foreach (Route x in TestBFS.getSequence())
+            {
+                foreach (Coordinate y in x.getRoutes())
+                {
+                    //grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.Blue;
+                    //grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.ForeColor = Color.Blue;
+                    // await Task.Delay(1000);
+                    // without IF conditions yet.
+                    grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.White;
+                    grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.ForeColor = Color.White;
+
+                }
+                grid_hartakarun.Rows[x.getRoutesTopX()].Cells[x.getRoutesTopY()].Style.BackColor = Color.Blue;
+                grid_hartakarun.Rows[x.getRoutesTopX()].Cells[x.getRoutesTopY()].Style.ForeColor = Color.Blue;
+                await Task.Delay(1000);
+            }*/
+            Route o = TestBFS.getFinal();
+            foreach (Coordinate fin in o.getRoutes())
+            {
+                grid_hartakarun.Rows[fin.getX()].Cells[fin.getY()].Style.BackColor = Color.GreenYellow;
+                grid_hartakarun.Rows[fin.getX()].Cells[fin.getY()].Style.ForeColor = Color.GreenYellow;
             }
         }
 
@@ -134,15 +175,66 @@ namespace TreasureHunt
         {
             DFSSolver TestDFS = new DFSSolver(this.maze);
             TestDFS.solve();
-            foreach(Coordinate x in TestDFS.getRoute())
+            foreach (Coordinate x in TestDFS.getRoute())
             {
-                grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Blue;
-                grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Blue;
-                await Task.Delay(1000);
-                grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Green;
-                grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Green;
+                if (grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor == Color.White)
+                {
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Blue;
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Blue;
+                    await Task.Delay(1000);
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.GreenYellow;
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.GreenYellow;
+                }
+                else if (grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor == Color.GreenYellow)
+                {
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Blue;
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Blue;
+                    await Task.Delay(1000);
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.LawnGreen;
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.LawnGreen;
+                }
+                else if (grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor == Color.LawnGreen)
+                {
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Blue;
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Blue;
+                    await Task.Delay(1000);
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Lime;
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Lime;
+                }
+                else if (grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor == Color.Lime)
+                {
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Blue;
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Blue;
+                    await Task.Delay(1000);
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.LimeGreen;
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.LimeGreen;
+                }
+                else if (grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor == Color.LimeGreen)
+                {
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Blue;
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Blue;
+                    await Task.Delay(1000);
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.ForestGreen;
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.ForestGreen;
+                }
+                else if (grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor == Color.ForestGreen)
+                {
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Blue;
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Blue;
+                    await Task.Delay(1000);
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Green;
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Green;
+                }
+                else if (grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor == Color.Green)
+                {
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Blue;
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Blue;
+                    await Task.Delay(1000);
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.DarkGreen;
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.DarkGreen;
+                }
             }
-            await Task.Delay(1000);
+            await Task.Delay(250);
         }
      
 

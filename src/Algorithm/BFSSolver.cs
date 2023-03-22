@@ -35,6 +35,11 @@ namespace TreasureHunt.Algorithm {
         {
             return this.sequenceOfRoute;
         }
+
+        public Route getFinal()
+        {
+            return this.finalRoute;
+        }
         // expand coordinate with bfs rules
         public List<Coordinate> expandWithBFS() {
             List<Coordinate> neighborNode = new List<Coordinate>();
