@@ -125,30 +125,26 @@ namespace TreasureHunt
         }
         private async void BFS_Algo()
         {
-            visited = new int[this.maze.getRow(), this.maze.getCol()];
-            for (int i = 0; i < this.maze.getRow(); i++)
-            {
-                for (int j = 0; j < this.maze.getCol(); j++)
-                {
-                    visited[i, j] = 0;
-                }
-            }
-            foreach (Route x in bfs_sol.getSequence())
+            /*foreach (Route x in bfs_sol.getSequence())
             {
                 foreach (Coordinate y in x.getRoutes())
                 {
-                    if (visited[y.getX(), y.getY()] == 0)
+                    //grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.Blue;
+                    //grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.ForeColor = Color.Blue;
+                    //await Task.Delay(delay);
+                    if (x.getNumsCoordinateVisited(y) == 0)
                     {
                         grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.FromArgb(255, 255, 0);
                         grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.ForeColor = Color.FromArgb(255, 255, 0);
                     }
                     else
                     {
-                        int col = visited[y.getX(), y.getY()];
-                        grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.FromArgb(255 - 5 * col, 255 - 5 * col, 0);
-                        grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.ForeColor = Color.FromArgb(255 - 5 * col, 255 - 5 * col, 0);
+                        int vis = x.getNumsCoordinateVisited(y);
+                        grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.FromArgb(255 - 10 * vis, 255 - 10 * vis, 0);
+                        grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.ForeColor = Color.FromArgb(255 - 10 * vis, 255 - 10 * vis, 0);
                     }
-                    visited[y.getX(), y.getY()]++;
+                    //visited[y.getX(), y.getY()]++;
+                    
 
                 }
                 grid_hartakarun.Rows[x.getRoutesTopX()].Cells[x.getRoutesTopY()].Style.BackColor = Color.Blue;
@@ -164,9 +160,71 @@ namespace TreasureHunt
             Route o = bfs_sol.getFinalRoute();
             foreach (Coordinate fin in o.getRoutes())
             {
+                int fon = o.getNumsCoordinateVisited(fin);
+                grid_hartakarun.Rows[fin.getX()].Cells[fin.getY()].Style.BackColor = Color.FromArgb(255 - 10 * fon, 255 - 10 * fon, 0);
+                grid_hartakarun.Rows[fin.getX()].Cells[fin.getY()].Style.ForeColor = Color.FromArgb(255 - 10 * fon, 255 - 10 * fon, 0);
+            }*/
+            foreach (Route x in bfs_sol.getSequence())
+            {
+                visited = new int[this.maze.getRow(), this.maze.getCol()];
+                for (int i = 0; i < this.maze.getRow(); i++)
+                {
+                    for (int j = 0; j < this.maze.getCol(); j++)
+                    {
+                        visited[i, j] = 0;
+                    }
+                }
+                foreach (Coordinate y in x.getRoutes())
+                {
+                    if (visited[y.getX(), y.getY()] == 0)
+                    {
+                        grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.FromArgb(255, 255, 0);
+                    }
+                    else
+                    {
+                        int col = visited[y.getX(), y.getY()];
+                        grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.FromArgb(255 - 10 * col, 255 - 10 * col, 0);
+                        //grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.ForeColor = Color.FromArgb(255 - 10 * col, 255 - 10 * col, 0);
+                    }
+                    visited[y.getX(), y.getY()]++;
+
+                }
+                grid_hartakarun.Rows[x.getRoutesTopX()].Cells[x.getRoutesTopY()].Style.BackColor = Color.Blue;
+                grid_hartakarun.Rows[x.getRoutesTopX()].Cells[x.getRoutesTopY()].Style.ForeColor = Color.Blue;
+                await Task.Delay(delay);
+                if (grid_hartakarun.Rows[x.getRoutesTopX()].Cells[x.getRoutesTopY()].Value == "Start" || grid_hartakarun.Rows[x.getRoutesTopX()].Cells[x.getRoutesTopY()].Value == "Treassure")
+                {
+                    grid_hartakarun.Rows[x.getRoutesTopX()].Cells[x.getRoutesTopY()].Style.ForeColor = Color.Black;
+                }
+                // reset every route on the way
+                foreach (Coordinate z in x.getRoutes())
+                {
+                    grid_hartakarun.Rows[z.getX()].Cells[z.getY()].Style.BackColor = Color.White;
+                    //grid_hartakarun.Rows[z.getX()].Cells[z.getY()].Style.ForeColor = Color.White;
+                }
+            }
+            Route o;
+            if (TSP)
+            {
+                o = bfs_sol.getFinalRoute();
+            }
+            else
+            {
+                o = bfs_sol.getFinalRouteTSP();
+            }
+            foreach (Coordinate fin in o.getRoutes())
+            {
+                visited = new int[this.maze.getRow(), this.maze.getCol()];
+                for (int i = 0; i < this.maze.getRow(); i++)
+                {
+                    for (int j = 0; j < this.maze.getCol(); j++)
+                    {
+                        visited[i, j] = 0;
+                    }
+                }
                 int fon = visited[fin.getX(), fin.getY()];
-                grid_hartakarun.Rows[fin.getX()].Cells[fin.getY()].Style.BackColor = Color.FromArgb(255 - 5*fon, 255 - 5*fon, 0);
-                grid_hartakarun.Rows[fin.getX()].Cells[fin.getY()].Style.ForeColor = Color.FromArgb(255 - 5*fon, 255 - 5*fon, 0);
+                grid_hartakarun.Rows[fin.getX()].Cells[fin.getY()].Style.BackColor = Color.FromArgb(255 - 10*fon, 255 - 10*fon, 0);
+                //grid_hartakarun.Rows[fin.getX()].Cells[fin.getY()].Style.ForeColor = Color.FromArgb(255 - 10*fon, 255 - 10*fon, 0);
             }
         }
 
@@ -188,8 +246,12 @@ namespace TreasureHunt
                     grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Blue;
                     grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Blue;
                     await Task.Delay(delay);
+                    if (grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Value == "Start" || grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Value == "Treassure")
+                    {
+                        grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Black;
+                    }
                     grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.FromArgb(255, 255, 0);
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.FromArgb(255, 255, 0);
+                    //grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.FromArgb(255, 255, 0);
                     visited[x.getX(), x.getY()]++;
                 }
                 else
@@ -198,60 +260,14 @@ namespace TreasureHunt
                     grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Blue;
                     grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Blue;
                     await Task.Delay(delay);
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.FromArgb(255-20*a, 255-20*a, 0);
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.FromArgb(255-20*a, 255-20*a, 0);
+                    if (grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Value == "Start" || grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Value == "Treassure")
+                    {
+                        grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Black;
+                    }
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.FromArgb(255-10*a, 255-10*a, 0);
+                    //grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.FromArgb(255-10*a, 255-10*a, 0);
                     visited[x.getX(), x.getY()]++;
                 }
-
-                /*
-                else if (grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor == Color.GreenYellow)
-                {
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Blue;
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Blue;
-                    await Task.Delay(1000);
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.LawnGreen;
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.LawnGreen;
-                }
-                else if (grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor == Color.LawnGreen)
-                {
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Blue;
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Blue;
-                    await Task.Delay(1000);
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Lime;
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Lime;
-                }
-                else if (grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor == Color.Lime)
-                {
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Blue;
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Blue;
-                    await Task.Delay(1000);
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.LimeGreen;
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.LimeGreen;
-                }
-                else if (grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor == Color.LimeGreen)
-                {
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Blue;
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Blue;
-                    await Task.Delay(1000);
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.ForestGreen;
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.ForestGreen;
-                }
-                else if (grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor == Color.ForestGreen)
-                {
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Blue;
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Blue;
-                    await Task.Delay(1000);
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Green;
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Green;
-                }
-                else if (grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor == Color.Green)
-                {
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Blue;
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Blue;
-                    await Task.Delay(1000);
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.DarkGreen;
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.DarkGreen;
-                }*/
             }
         }
 
@@ -265,18 +281,30 @@ namespace TreasureHunt
                 Browse_file_warning.Text = "";
                 if (algorithm == "BFS")
                 {
+                    Route_result.Text = "";
                     Pick_algorithm_warning.Text = "";
                     bfs_sol = new BFSSolver(this.maze);
+                    et.Reset();
                     et.Start();
                     if (TSP)
                     {
                         bfs_sol.solveAndTSP();
+                        et.Stop();
+                        foreach (String x in bfs_sol.getFinalRouteTSP().getSequenceOfDirection())
+                        {
+                            Route_result.Text += x + "-";
+                        }
+                        //Route_result.Text = 
                     }
                     else
                     {
                         bfs_sol.solve();
+                        et.Stop();
+                        foreach (String x in bfs_sol.getFinalRoute().getSequenceOfDirection())
+                        {
+                            Route_result.Text += x + "-";
+                        }
                     }
-                    et.Stop();
                     et_value.Text = et.ElapsedMilliseconds + " ms";
                     et.Reset();
                     BFS_solved = true;
@@ -288,16 +316,22 @@ namespace TreasureHunt
                     Pick_algorithm_warning.Text = "";
                     dfs_sol = new DFSSolver();
                     dfs_sol.fillMaze(fileName);
+                    et.Reset();
                     et.Start();
                     if (TSP)
                     {
                         dfs_sol.solveAndTSP();
+                        et.Stop();
                     }
                     else
                     {
                         dfs_sol.solve();
+                        et.Stop();
                     }
-                    et.Stop();
+                    foreach (String x in dfs_sol.getSequenceOfDirection())
+                    {
+                        Route_result.Text += x + "-";
+                    }
                     et_value.Text = et.ElapsedMilliseconds +" ms";
                     et.Reset();
 
@@ -336,10 +370,6 @@ namespace TreasureHunt
                     if (row.Cells[i].Style.BackColor != Color.Black)
                     {
                         row.Cells[i].Style.BackColor = Color.White;
-                        if (row.Cells[i].Value != "")
-                        {
-                            row.Cells[i].Style.ForeColor = Color.Black;
-                        }
                     }
                 }
             }

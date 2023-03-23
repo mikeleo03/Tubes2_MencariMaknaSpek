@@ -60,6 +60,7 @@ namespace TreasureHunt
             this.Execution_time = new System.Windows.Forms.Timer(this.components);
             this.et_value = new System.Windows.Forms.Label();
             this.TSP_checkBox = new System.Windows.Forms.CheckBox();
+            this.Route_result = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grid_hartakarun)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Delay_Scrollbar)).BeginInit();
             this.SuspendLayout();
@@ -369,6 +370,15 @@ namespace TreasureHunt
             this.TSP_checkBox.UseVisualStyleBackColor = true;
             this.TSP_checkBox.CheckedChanged += new System.EventHandler(this.TSP_checkBox_CheckedChanged);
             // 
+            // Route_result
+            // 
+            this.Route_result.AutoSize = true;
+            this.Route_result.Location = new System.Drawing.Point(806, 738);
+            this.Route_result.Name = "Route_result";
+            this.Route_result.Size = new System.Drawing.Size(64, 16);
+            this.Route_result.TabIndex = 30;
+            this.Route_result.Text = "                   ";
+            // 
             // TreasureFinder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -376,6 +386,7 @@ namespace TreasureHunt
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.LightBlue;
             this.ClientSize = new System.Drawing.Size(1641, 1033);
+            this.Controls.Add(this.Route_result);
             this.Controls.Add(this.TSP_checkBox);
             this.Controls.Add(this.et_value);
             this.Controls.Add(this.milisekon_label);
@@ -446,6 +457,7 @@ namespace TreasureHunt
         private System.Windows.Forms.Label milisekon_label;
         private System.Windows.Forms.Timer Execution_time;
         private System.Windows.Forms.Label et_value;
-        private System.Windows.Forms.CheckBox TSP_checkBox;    
+        private System.Windows.Forms.CheckBox TSP_checkBox;
+        private System.Windows.Forms.Label Route_result;
     }
 }
