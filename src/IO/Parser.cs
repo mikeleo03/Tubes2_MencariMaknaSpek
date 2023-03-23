@@ -7,19 +7,21 @@ using System.Threading.Tasks;
 using TreasureHunt.Container;
 
 namespace TreasureHunt.IO {
+    // Kelas Parser
     class Parser {
-        // attributes
-        public Node[,] map;
-        private string fileName; // nama file
-        private int row; // jumlah baris
-        private int col; // jumlah kolom
-        private int i;
-        private int j;
-        private int startPoint; // titik mulai
-        private Coordinate startLoc; // lokasi titik mulai
-        private int treasure; // jumlah treassure
+        // Atribut kelas
+        public Node[,] map;             // Matriks node penyimpan peta
+        private string fileName;        // Nama file
+        private int row;                // Jumlah baris
+        private int col;                // Jumlah kolom
+        private int i;                  // Iterator baris
+        private int j;                  // Iterator kolom
+        private int startPoint;         // Titik mulai
+        private Coordinate startLoc;    // Lokasi titik mulai
+        private int treasure;           // Jumlah harta karun
 
-        // constructors
+        // Metode kelas
+        // 1. Konstruktor objek parser (default)
         public Parser() {
             this.map = new Node[0,0];
             this.fileName = string.Empty;
@@ -32,6 +34,7 @@ namespace TreasureHunt.IO {
             this.treasure = 0;
         } 
 
+        // 2. Konstruktor objek parser
         public Parser(string fileName) {
             this.map = new Node[0,0];
             this.fileName = fileName;
@@ -44,36 +47,42 @@ namespace TreasureHunt.IO {
             this.treasure = 0;
         }
 
-        // getter 
+        // 3. Getter atribut row
         public int getRow() {
             return this.row;
         }
 
+        // 4. Getter atribut col
         public int getCol() {
             return this.col;
         }
 
+        // 5. Getter atribut treasure
         public int getTreasure() {
             return this.treasure;
         }
 
+        // 6. Getter atribut startLoc
         public Coordinate getStart() {
             return this.startLoc;
         }
 
-        // check validity of file
+        // 7. Melemparkan exception jika col tidak sama dengan kolom mula-mula peta
         public void checkColumnInRow(int col) {
             if (col != this.col) {
                 throw new Exception("Number of column is not same");
             }
         }
 
+        // 8. Melemparkan exception jika s tidak sesuai dengan simbol T, R, X, atau K
         public void checkCharacterValidity(string s) {
             if (!(s == "K" || s == "X" || s == "R" || s == "T")) {
                 throw new Exception("Character in file cannot be defined");
             }
         }
 
+        // 9. Mengubah atribut objek Parser tergantung pada c, jika terdapat 2 simbol K
+        // yang muncul, maka akan melemparkan exception
         public void processCharacter(char c) {
             if (c == 'T') {
                 this.treasure++;
@@ -88,7 +97,7 @@ namespace TreasureHunt.IO {
             }
         }
 
-        // parse and fill matrix according to txt file
+        // 10. Mengembalikan matriks simpul hasil parsing
         public Node[,] parseAndFill() {
             string[] lines = System.IO.File.ReadAllLines(this.fileName);
             if (lines.Length == 0) {
