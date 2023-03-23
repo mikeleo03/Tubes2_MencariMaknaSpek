@@ -53,6 +53,13 @@ namespace TreasureHunt.Algorithm {
         
         // 5. Getter atribut finalRouteTSP
         public Route getFinalRouteTSP() { 
+            
+            
+            
+            
+            
+            
+            
             return this.finalRouteTSP; 
         }
 

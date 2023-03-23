@@ -155,7 +155,7 @@ namespace TreasureHunt
                     else
                     {
                         int col = visited[y.getX(), y.getY()];
-                        grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.FromArgb(255 - 10 * col, 255 - 10 * col, 0);
+                        grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.FromArgb(255 - 15 * col, 255 - 15 * col, 0);
                         //grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.ForeColor = Color.FromArgb(255 - 10 * col, 255 - 10 * col, 0);
                     }
                     visited[y.getX(), y.getY()]++;
@@ -196,7 +196,7 @@ namespace TreasureHunt
             {
                 
                 int fon = visited[fin.getX(), fin.getY()];
-                grid_hartakarun.Rows[fin.getX()].Cells[fin.getY()].Style.BackColor = Color.FromArgb(255 - 10*fon, 255 - 10*fon, 0);
+                grid_hartakarun.Rows[fin.getX()].Cells[fin.getY()].Style.BackColor = Color.FromArgb(255 - 15*fon, 255 - 15*fon, 0);
                 //grid_hartakarun.Rows[fin.getX()].Cells[fin.getY()].Style.ForeColor = Color.FromArgb(255 - 10*fon, 255 - 10*fon, 0);
             }
         }
@@ -231,7 +231,7 @@ namespace TreasureHunt
                 else
                 {
                     int a = visited[x.getX(), x.getY()];
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.FromArgb(255-10*a, 255-10*a, 0);
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.FromArgb(255-15*a, 255-15*a, 0);
                     //grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.FromArgb(255-10*a, 255-10*a, 0);
                     visited[x.getX(), x.getY()]++;
                 }
@@ -246,12 +246,12 @@ namespace TreasureHunt
                 ClearTable();
                 this.maze.fillMatrix(fileName);
                 Browse_file_warning.Text = "";
+                Route_result.Text = "";
                 if (algorithm == "BFS")
                 {
                     Route_result.Text = "";
                     Pick_algorithm_warning.Text = "";
                     bfs_sol = new BFSSolver(this.maze);
-                    et.Reset();
                     et.Start();
                     if (TSP)
                     {
@@ -261,7 +261,8 @@ namespace TreasureHunt
                         {
                             Route_result.Text += x + "-";
                         }
-                        //Route_result.Text = 
+                        Route_result.Text = Route_result.Text.Substring(0, Route_result.Text.Length - 1);
+                        Steps_taken.Text = bfs_sol.numsOfStepsTSP().ToString();
                     }
                     else
                     {
@@ -271,7 +272,10 @@ namespace TreasureHunt
                         {
                             Route_result.Text += x + "-";
                         }
+                        Route_result.Text = Route_result.Text.Substring(0, Route_result.Text.Length - 1);
+                        Steps_taken.Text = bfs_sol.numsOfSteps().ToString();
                     }
+                    Nodes_taken.Text = bfs_sol.numsOfNode().ToString();
                     et_value.Text = et.ElapsedMilliseconds + " ms";
                     et.Reset();
                     BFS_solved = true;
@@ -283,7 +287,7 @@ namespace TreasureHunt
                     Pick_algorithm_warning.Text = "";
                     dfs_sol = new DFSSolver();
                     dfs_sol.fillMaze(fileName);
-                    et.Reset();
+                    //et.Reset();
                     et.Start();
                     if (TSP)
                     {
@@ -299,7 +303,11 @@ namespace TreasureHunt
                     {
                         Route_result.Text += x + "-";
                     }
+                    Route_result.Text = Route_result.Text.Substring(0, Route_result.Text.Length - 1);
+                    Steps_taken.Text = (dfs_sol.getRoute().Length-1).ToString();
+                    Nodes_taken.Text = (dfs_sol.getRoute().Length - 1).ToString();
                     et_value.Text = et.ElapsedMilliseconds +" ms";
+                    
                     et.Reset();
 
                     DFS_solved = true;

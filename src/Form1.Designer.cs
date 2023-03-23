@@ -43,7 +43,6 @@ namespace TreasureHunt
             this.Pick_algorithm_warning = new System.Windows.Forms.Label();
             this.Search = new System.Windows.Forms.Button();
             this.Line = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.Visualize_Button = new System.Windows.Forms.Button();
             this.Browse_file_warning = new System.Windows.Forms.Label();
             this.Line2 = new System.Windows.Forms.Label();
@@ -61,6 +60,8 @@ namespace TreasureHunt
             this.et_value = new System.Windows.Forms.Label();
             this.TSP_checkBox = new System.Windows.Forms.CheckBox();
             this.Route_result = new System.Windows.Forms.Label();
+            this.Steps_taken = new System.Windows.Forms.Label();
+            this.Nodes_taken = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grid_hartakarun)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Delay_Scrollbar)).BeginInit();
             this.SuspendLayout();
@@ -68,9 +69,9 @@ namespace TreasureHunt
             // Title_Label
             // 
             this.Title_Label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.Title_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Title_Label.Font = new System.Drawing.Font("Bernard MT Condensed", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Title_Label.ForeColor = System.Drawing.Color.Black;
-            this.Title_Label.Location = new System.Drawing.Point(123, 9);
+            this.Title_Label.Location = new System.Drawing.Point(73, 9);
             this.Title_Label.Name = "Title_Label";
             this.Title_Label.Size = new System.Drawing.Size(1406, 43);
             this.Title_Label.TabIndex = 0;
@@ -81,8 +82,8 @@ namespace TreasureHunt
             // Input_Label
             // 
             this.Input_Label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.Input_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Input_Label.Location = new System.Drawing.Point(38, 110);
+            this.Input_Label.Font = new System.Drawing.Font("Bernard MT Condensed", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Input_Label.Location = new System.Drawing.Point(25, 110);
             this.Input_Label.Name = "Input_Label";
             this.Input_Label.Size = new System.Drawing.Size(611, 43);
             this.Input_Label.TabIndex = 1;
@@ -92,9 +93,9 @@ namespace TreasureHunt
             // Output_Label
             // 
             this.Output_Label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.Output_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Output_Label.Font = new System.Drawing.Font("Bernard MT Condensed", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Output_Label.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.Output_Label.Location = new System.Drawing.Point(692, 110);
+            this.Output_Label.Location = new System.Drawing.Point(521, 110);
             this.Output_Label.Name = "Output_Label";
             this.Output_Label.Size = new System.Drawing.Size(698, 43);
             this.Output_Label.TabIndex = 2;
@@ -104,8 +105,8 @@ namespace TreasureHunt
             // Filename_label
             // 
             this.Filename_label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.Filename_label.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Filename_label.Location = new System.Drawing.Point(40, 219);
+            this.Filename_label.Font = new System.Drawing.Font("Bernard MT Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Filename_label.Location = new System.Drawing.Point(27, 219);
             this.Filename_label.Name = "Filename_label";
             this.Filename_label.Size = new System.Drawing.Size(224, 43);
             this.Filename_label.TabIndex = 3;
@@ -114,14 +115,16 @@ namespace TreasureHunt
             // 
             // Filename_iotbox
             // 
-            this.Filename_iotbox.Location = new System.Drawing.Point(89, 265);
+            this.Filename_iotbox.Font = new System.Drawing.Font("Impact", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Filename_iotbox.Location = new System.Drawing.Point(33, 265);
             this.Filename_iotbox.Name = "Filename_iotbox";
-            this.Filename_iotbox.Size = new System.Drawing.Size(140, 22);
+            this.Filename_iotbox.Size = new System.Drawing.Size(140, 23);
             this.Filename_iotbox.TabIndex = 4;
             // 
             // browse_button
             // 
-            this.browse_button.Location = new System.Drawing.Point(89, 305);
+            this.browse_button.Font = new System.Drawing.Font("Impact", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.browse_button.Location = new System.Drawing.Point(33, 309);
             this.browse_button.Name = "browse_button";
             this.browse_button.Size = new System.Drawing.Size(75, 23);
             this.browse_button.TabIndex = 5;
@@ -143,7 +146,7 @@ namespace TreasureHunt
             this.grid_hartakarun.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.grid_hartakarun.ColumnHeadersVisible = false;
             this.grid_hartakarun.Enabled = false;
-            this.grid_hartakarun.Location = new System.Drawing.Point(700, 219);
+            this.grid_hartakarun.Location = new System.Drawing.Point(540, 219);
             this.grid_hartakarun.MultiSelect = false;
             this.grid_hartakarun.Name = "grid_hartakarun";
             this.grid_hartakarun.ReadOnly = true;
@@ -161,19 +164,20 @@ namespace TreasureHunt
             // Algoritma_Label
             // 
             this.Algoritma_Label.AutoSize = true;
-            this.Algoritma_Label.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Algoritma_Label.Location = new System.Drawing.Point(89, 382);
+            this.Algoritma_Label.Font = new System.Drawing.Font("Bernard MT Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Algoritma_Label.Location = new System.Drawing.Point(33, 386);
             this.Algoritma_Label.Name = "Algoritma_Label";
-            this.Algoritma_Label.Size = new System.Drawing.Size(141, 36);
+            this.Algoritma_Label.Size = new System.Drawing.Size(128, 36);
             this.Algoritma_Label.TabIndex = 7;
             this.Algoritma_Label.Text = "Algoritma";
             // 
             // BFS_option
             // 
             this.BFS_option.AutoSize = true;
-            this.BFS_option.Location = new System.Drawing.Point(95, 436);
+            this.BFS_option.Font = new System.Drawing.Font("Impact", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BFS_option.Location = new System.Drawing.Point(39, 440);
             this.BFS_option.Name = "BFS_option";
-            this.BFS_option.Size = new System.Drawing.Size(54, 20);
+            this.BFS_option.Size = new System.Drawing.Size(48, 21);
             this.BFS_option.TabIndex = 8;
             this.BFS_option.TabStop = true;
             this.BFS_option.Text = "BFS";
@@ -183,9 +187,10 @@ namespace TreasureHunt
             // DFS_option
             // 
             this.DFS_option.AutoSize = true;
-            this.DFS_option.Location = new System.Drawing.Point(95, 462);
+            this.DFS_option.Font = new System.Drawing.Font("Impact", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.DFS_option.Location = new System.Drawing.Point(39, 466);
             this.DFS_option.Name = "DFS_option";
-            this.DFS_option.Size = new System.Drawing.Size(55, 20);
+            this.DFS_option.Size = new System.Drawing.Size(48, 21);
             this.DFS_option.TabIndex = 9;
             this.DFS_option.TabStop = true;
             this.DFS_option.Text = "DFS";
@@ -195,16 +200,18 @@ namespace TreasureHunt
             // Pick_algorithm_warning
             // 
             this.Pick_algorithm_warning.AutoSize = true;
+            this.Pick_algorithm_warning.Font = new System.Drawing.Font("Impact", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Pick_algorithm_warning.ForeColor = System.Drawing.Color.Red;
-            this.Pick_algorithm_warning.Location = new System.Drawing.Point(92, 495);
+            this.Pick_algorithm_warning.Location = new System.Drawing.Point(36, 499);
             this.Pick_algorithm_warning.Name = "Pick_algorithm_warning";
-            this.Pick_algorithm_warning.Size = new System.Drawing.Size(49, 16);
+            this.Pick_algorithm_warning.Size = new System.Drawing.Size(36, 17);
             this.Pick_algorithm_warning.TabIndex = 10;
             this.Pick_algorithm_warning.Text = "              ";
             // 
             // Search
             // 
-            this.Search.Location = new System.Drawing.Point(954, 693);
+            this.Search.Font = new System.Drawing.Font("Impact", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Search.Location = new System.Drawing.Point(790, 697);
             this.Search.Name = "Search";
             this.Search.Size = new System.Drawing.Size(75, 23);
             this.Search.TabIndex = 11;
@@ -215,27 +222,18 @@ namespace TreasureHunt
             // Line
             // 
             this.Line.BackColor = System.Drawing.Color.Black;
-            this.Line.Location = new System.Drawing.Point(17, 78);
+            this.Line.Location = new System.Drawing.Point(17, 70);
             this.Line.Name = "Line";
-            this.Line.Size = new System.Drawing.Size(1600, 2);
+            this.Line.Size = new System.Drawing.Size(1500, 2);
             this.Line.TabIndex = 7;
             this.Line.Text = " \r\n";
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Location = new System.Drawing.Point(92, 656);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(49, 16);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "              ";
-            // 
             // Visualize_Button
             // 
-            this.Visualize_Button.Location = new System.Drawing.Point(95, 693);
+            this.Visualize_Button.Font = new System.Drawing.Font("Impact", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Visualize_Button.Location = new System.Drawing.Point(39, 697);
             this.Visualize_Button.Name = "Visualize_Button";
-            this.Visualize_Button.Size = new System.Drawing.Size(264, 23);
+            this.Visualize_Button.Size = new System.Drawing.Size(196, 23);
             this.Visualize_Button.TabIndex = 16;
             this.Visualize_Button.Text = "Visualize";
             this.Visualize_Button.UseVisualStyleBackColor = true;
@@ -244,17 +242,18 @@ namespace TreasureHunt
             // Browse_file_warning
             // 
             this.Browse_file_warning.AutoSize = true;
+            this.Browse_file_warning.Font = new System.Drawing.Font("Impact", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Browse_file_warning.ForeColor = System.Drawing.Color.Red;
-            this.Browse_file_warning.Location = new System.Drawing.Point(89, 344);
+            this.Browse_file_warning.Location = new System.Drawing.Point(33, 348);
             this.Browse_file_warning.Name = "Browse_file_warning";
-            this.Browse_file_warning.Size = new System.Drawing.Size(37, 16);
+            this.Browse_file_warning.Size = new System.Drawing.Size(28, 17);
             this.Browse_file_warning.TabIndex = 17;
             this.Browse_file_warning.Text = "          ";
             // 
             // Line2
             // 
             this.Line2.BackColor = System.Drawing.Color.Black;
-            this.Line2.Location = new System.Drawing.Point(464, 136);
+            this.Line2.Location = new System.Drawing.Point(339, 110);
             this.Line2.Name = "Line2";
             this.Line2.Size = new System.Drawing.Size(2, 700);
             this.Line2.TabIndex = 18;
@@ -263,36 +262,40 @@ namespace TreasureHunt
             // Route_Label
             // 
             this.Route_Label.AutoSize = true;
-            this.Route_Label.Location = new System.Drawing.Point(668, 738);
+            this.Route_Label.Font = new System.Drawing.Font("Impact", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Route_Label.Location = new System.Drawing.Point(436, 738);
             this.Route_Label.Name = "Route_Label";
-            this.Route_Label.Size = new System.Drawing.Size(107, 16);
+            this.Route_Label.Size = new System.Drawing.Size(85, 17);
             this.Route_Label.TabIndex = 19;
             this.Route_Label.Text = "Routes                 : ";
             // 
             // Steps_Label
             // 
             this.Steps_Label.AutoSize = true;
-            this.Steps_Label.Location = new System.Drawing.Point(668, 765);
+            this.Steps_Label.Font = new System.Drawing.Font("Impact", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Steps_Label.Location = new System.Drawing.Point(1161, 309);
             this.Steps_Label.Name = "Steps_Label";
-            this.Steps_Label.Size = new System.Drawing.Size(105, 16);
+            this.Steps_Label.Size = new System.Drawing.Size(82, 17);
             this.Steps_Label.TabIndex = 20;
             this.Steps_Label.Text = "Steps                   : ";
             // 
             // Nodes_Label
             // 
             this.Nodes_Label.AutoSize = true;
-            this.Nodes_Label.Location = new System.Drawing.Point(668, 790);
+            this.Nodes_Label.Font = new System.Drawing.Font("Impact", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Nodes_Label.Location = new System.Drawing.Point(1158, 406);
             this.Nodes_Label.Name = "Nodes_Label";
-            this.Nodes_Label.Size = new System.Drawing.Size(108, 16);
+            this.Nodes_Label.Size = new System.Drawing.Size(83, 17);
             this.Nodes_Label.TabIndex = 21;
             this.Nodes_Label.Text = "Nodes                  : ";
             // 
             // ExT_Label
             // 
             this.ExT_Label.AutoSize = true;
-            this.ExT_Label.Location = new System.Drawing.Point(668, 818);
+            this.ExT_Label.Font = new System.Drawing.Font("Impact", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ExT_Label.Location = new System.Drawing.Point(1152, 499);
             this.ExT_Label.Name = "ExT_Label";
-            this.ExT_Label.Size = new System.Drawing.Size(114, 16);
+            this.ExT_Label.Size = new System.Drawing.Size(100, 17);
             this.ExT_Label.TabIndex = 22;
             this.ExT_Label.Text = "Execution Time    :";
             // 
@@ -300,7 +303,7 @@ namespace TreasureHunt
             // 
             this.Visualize_Warning.AutoSize = true;
             this.Visualize_Warning.ForeColor = System.Drawing.Color.Red;
-            this.Visualize_Warning.Location = new System.Drawing.Point(166, 738);
+            this.Visualize_Warning.Location = new System.Drawing.Point(78, 738);
             this.Visualize_Warning.Name = "Visualize_Warning";
             this.Visualize_Warning.Size = new System.Drawing.Size(112, 16);
             this.Visualize_Warning.TabIndex = 23;
@@ -308,7 +311,7 @@ namespace TreasureHunt
             // 
             // Delay_Scrollbar
             // 
-            this.Delay_Scrollbar.Location = new System.Drawing.Point(1339, 186);
+            this.Delay_Scrollbar.Location = new System.Drawing.Point(1184, 187);
             this.Delay_Scrollbar.Maximum = 2000;
             this.Delay_Scrollbar.Minimum = 100;
             this.Delay_Scrollbar.Name = "Delay_Scrollbar";
@@ -320,28 +323,30 @@ namespace TreasureHunt
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(1333, 136);
+            this.label2.Font = new System.Drawing.Font("Bernard MT Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(1189, 137);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(195, 36);
+            this.label2.Size = new System.Drawing.Size(175, 36);
             this.label2.TabIndex = 25;
             this.label2.Text = "Delay Interval";
             // 
             // delay_value
             // 
             this.delay_value.AutoSize = true;
-            this.delay_value.Location = new System.Drawing.Point(1398, 234);
+            this.delay_value.Font = new System.Drawing.Font("Impact", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.delay_value.Location = new System.Drawing.Point(1243, 235);
             this.delay_value.Name = "delay_value";
-            this.delay_value.Size = new System.Drawing.Size(40, 16);
+            this.delay_value.Size = new System.Drawing.Size(30, 17);
             this.delay_value.TabIndex = 26;
             this.delay_value.Text = "           ";
             // 
             // milisekon_label
             // 
             this.milisekon_label.AutoSize = true;
-            this.milisekon_label.Location = new System.Drawing.Point(1448, 234);
+            this.milisekon_label.Font = new System.Drawing.Font("Impact", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.milisekon_label.Location = new System.Drawing.Point(1293, 235);
             this.milisekon_label.Name = "milisekon_label";
-            this.milisekon_label.Size = new System.Drawing.Size(25, 16);
+            this.milisekon_label.Size = new System.Drawing.Size(24, 17);
             this.milisekon_label.TabIndex = 27;
             this.milisekon_label.Text = "ms";
             // 
@@ -352,19 +357,20 @@ namespace TreasureHunt
             // et_value
             // 
             this.et_value.AutoSize = true;
-            this.et_value.Location = new System.Drawing.Point(806, 819);
+            this.et_value.Font = new System.Drawing.Font("Impact", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.et_value.Location = new System.Drawing.Point(1293, 499);
             this.et_value.Name = "et_value";
-            this.et_value.Size = new System.Drawing.Size(61, 16);
+            this.et_value.Size = new System.Drawing.Size(44, 17);
             this.et_value.TabIndex = 28;
             this.et_value.Text = "                  ";
             // 
             // TSP_checkBox
             // 
             this.TSP_checkBox.AutoSize = true;
-            this.TSP_checkBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TSP_checkBox.Location = new System.Drawing.Point(95, 541);
+            this.TSP_checkBox.Font = new System.Drawing.Font("Impact", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TSP_checkBox.Location = new System.Drawing.Point(39, 545);
             this.TSP_checkBox.Name = "TSP_checkBox";
-            this.TSP_checkBox.Size = new System.Drawing.Size(63, 24);
+            this.TSP_checkBox.Size = new System.Drawing.Size(50, 21);
             this.TSP_checkBox.TabIndex = 29;
             this.TSP_checkBox.Text = "TSP";
             this.TSP_checkBox.UseVisualStyleBackColor = true;
@@ -373,19 +379,40 @@ namespace TreasureHunt
             // Route_result
             // 
             this.Route_result.AutoSize = true;
-            this.Route_result.Location = new System.Drawing.Point(806, 738);
+            this.Route_result.Location = new System.Drawing.Point(537, 739);
             this.Route_result.Name = "Route_result";
             this.Route_result.Size = new System.Drawing.Size(64, 16);
             this.Route_result.TabIndex = 30;
             this.Route_result.Text = "                   ";
             // 
+            // Steps_taken
+            // 
+            this.Steps_taken.AutoSize = true;
+            this.Steps_taken.Font = new System.Drawing.Font("Impact", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Steps_taken.Location = new System.Drawing.Point(1287, 309);
+            this.Steps_taken.Name = "Steps_taken";
+            this.Steps_taken.Size = new System.Drawing.Size(34, 17);
+            this.Steps_taken.TabIndex = 31;
+            this.Steps_taken.Text = "             ";
+            // 
+            // Nodes_taken
+            // 
+            this.Nodes_taken.AutoSize = true;
+            this.Nodes_taken.Font = new System.Drawing.Font("Impact", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Nodes_taken.Location = new System.Drawing.Point(1287, 406);
+            this.Nodes_taken.Name = "Nodes_taken";
+            this.Nodes_taken.Size = new System.Drawing.Size(38, 17);
+            this.Nodes_taken.TabIndex = 32;
+            this.Nodes_taken.Text = "               ";
+            // 
             // TreasureFinder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
             this.BackColor = System.Drawing.Color.LightBlue;
-            this.ClientSize = new System.Drawing.Size(1641, 1033);
+            this.ClientSize = new System.Drawing.Size(1541, 1033);
+            this.Controls.Add(this.Nodes_taken);
+            this.Controls.Add(this.Steps_taken);
             this.Controls.Add(this.Route_result);
             this.Controls.Add(this.TSP_checkBox);
             this.Controls.Add(this.et_value);
@@ -401,7 +428,6 @@ namespace TreasureHunt
             this.Controls.Add(this.Line2);
             this.Controls.Add(this.Browse_file_warning);
             this.Controls.Add(this.Visualize_Button);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.Line);
             this.Controls.Add(this.Search);
             this.Controls.Add(this.Pick_algorithm_warning);
@@ -441,7 +467,6 @@ namespace TreasureHunt
         private System.Windows.Forms.Label Pick_algorithm_warning;
         private System.Windows.Forms.Button Search;
         private System.Windows.Forms.Label Line;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button Visualize_Button;
         private System.Windows.Forms.Label Browse_file_warning;
         private System.Windows.Forms.Label Line2;
@@ -459,5 +484,7 @@ namespace TreasureHunt
         private System.Windows.Forms.Label et_value;
         private System.Windows.Forms.CheckBox TSP_checkBox;
         private System.Windows.Forms.Label Route_result;
+        private System.Windows.Forms.Label Steps_taken;
+        private System.Windows.Forms.Label Nodes_taken;
     }
 }
