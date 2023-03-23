@@ -261,7 +261,7 @@ namespace TreasureHunt.Algorithm {
         public int numsOfNode() {
             int count = 0;
             for (int i = 0; i < this.maze.getRow(); i++) {
-                for (int j = 0; j < this.maze.getRow(); j++) {
+                for (int j = 0; j < this.maze.getCol(); j++) {
                     if (this.maze.getMapElement(i, j).getVisitedTime() != -1) {
                         count += this.maze.getMapElement(i, j).getVisitedTime();
                     }
@@ -280,7 +280,7 @@ namespace TreasureHunt.Algorithm {
         // 13. Mendapatkan jumlah step yang diperlukan dari awal hingga solusi
         // ditemukan dengan algoritma BFS dengan TSP
         public int numsOfStepsTSP() {
-            return finalRouteTSP.getRouteLength();
+            return numsOfSteps() + finalRouteTSP.getRouteLength();
         }
     }
 }
