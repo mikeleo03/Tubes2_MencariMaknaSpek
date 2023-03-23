@@ -79,20 +79,31 @@ namespace TreasureHunt
                 fileName = Filename_iotbox.Text;
                 DataGrid.file = Filename_iotbox.Text;
                 maze = new MatrixNode();
-                this.maze.fillMatrix(Filename_iotbox.Text);
-                grid_hartakarun.DataSource = DataGrid.DataTableFromTextFile(this.maze.convertToStringArray());
-                grid_hartakarun.CellFormatting += grid_hartakarun_CellFormatting;
-                Filename_iotbox.Text = openFileDialog1.SafeFileName;
-                int tinggi = grid_hartakarun.Height / grid_hartakarun.Rows.Count;
-                foreach (DataGridViewRow row in grid_hartakarun.Rows) {
-                    row.Height = tinggi;
-                }
-                browsed = true;
-                if (grid_hartakarun.SelectedCells.Count > 0)
+                try
                 {
-                    // Clear the selection
-                    grid_hartakarun.ClearSelection();
+                    maze = new MatrixNode();
+                    this.maze.fillMatrix(Filename_iotbox.Text);
+                    grid_hartakarun.DataSource = DataGrid.DataTableFromTextFile(this.maze.convertToStringArray());
+                    grid_hartakarun.CellFormatting += grid_hartakarun_CellFormatting;
+                    Filename_iotbox.Text = openFileDialog1.SafeFileName;
+                    int tinggi = grid_hartakarun.Height / grid_hartakarun.Rows.Count;
+                    foreach (DataGridViewRow row in grid_hartakarun.Rows)
+                    {
+                        row.Height = tinggi;
+                    }
+                    browsed = true;
+                    if (grid_hartakarun.SelectedCells.Count > 0)
+                    {
+                        // Clear the selection
+                        grid_hartakarun.ClearSelection();
+                    }
                 }
+                catch
+                {
+                    Browse_file_warning.Text = "Invalid file";
+                }
+                
+               
             }
 
         }
@@ -125,45 +136,6 @@ namespace TreasureHunt
         }
         private async void BFS_Algo()
         {
-            /*foreach (Route x in bfs_sol.getSequence())
-            {
-                foreach (Coordinate y in x.getRoutes())
-                {
-                    //grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.Blue;
-                    //grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.ForeColor = Color.Blue;
-                    //await Task.Delay(delay);
-                    if (x.getNumsCoordinateVisited(y) == 0)
-                    {
-                        grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.FromArgb(255, 255, 0);
-                        grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.ForeColor = Color.FromArgb(255, 255, 0);
-                    }
-                    else
-                    {
-                        int vis = x.getNumsCoordinateVisited(y);
-                        grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.FromArgb(255 - 10 * vis, 255 - 10 * vis, 0);
-                        grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.ForeColor = Color.FromArgb(255 - 10 * vis, 255 - 10 * vis, 0);
-                    }
-                    //visited[y.getX(), y.getY()]++;
-                    
-
-                }
-                grid_hartakarun.Rows[x.getRoutesTopX()].Cells[x.getRoutesTopY()].Style.BackColor = Color.Blue;
-                grid_hartakarun.Rows[x.getRoutesTopX()].Cells[x.getRoutesTopY()].Style.ForeColor = Color.Blue;
-                await Task.Delay(delay);
-                // reset every route on the way
-                foreach (Coordinate z in x.getRoutes())
-                {
-                    grid_hartakarun.Rows[z.getX()].Cells[z.getY()].Style.BackColor = Color.White;
-                    grid_hartakarun.Rows[z.getX()].Cells[z.getY()].Style.ForeColor = Color.White;
-                }
-            }
-            Route o = bfs_sol.getFinalRoute();
-            foreach (Coordinate fin in o.getRoutes())
-            {
-                int fon = o.getNumsCoordinateVisited(fin);
-                grid_hartakarun.Rows[fin.getX()].Cells[fin.getY()].Style.BackColor = Color.FromArgb(255 - 10 * fon, 255 - 10 * fon, 0);
-                grid_hartakarun.Rows[fin.getX()].Cells[fin.getY()].Style.ForeColor = Color.FromArgb(255 - 10 * fon, 255 - 10 * fon, 0);
-            }*/
             foreach (Route x in bfs_sol.getSequence())
             {
                 visited = new int[this.maze.getRow(), this.maze.getCol()];
@@ -206,22 +178,23 @@ namespace TreasureHunt
             Route o;
             if (TSP)
             {
-                o = bfs_sol.getFinalRoute();
+                o = bfs_sol.getFinalRouteTSP();
             }
             else
             {
-                o = bfs_sol.getFinalRouteTSP();
+                o = bfs_sol.getFinalRoute();
+            }
+            visited = new int[this.maze.getRow(), this.maze.getCol()];
+            for (int i = 0; i < this.maze.getRow(); i++)
+            {
+                for (int j = 0; j < this.maze.getCol(); j++)
+                {
+                    visited[i, j] = 0;
+                }
             }
             foreach (Coordinate fin in o.getRoutes())
             {
-                visited = new int[this.maze.getRow(), this.maze.getCol()];
-                for (int i = 0; i < this.maze.getRow(); i++)
-                {
-                    for (int j = 0; j < this.maze.getCol(); j++)
-                    {
-                        visited[i, j] = 0;
-                    }
-                }
+                
                 int fon = visited[fin.getX(), fin.getY()];
                 grid_hartakarun.Rows[fin.getX()].Cells[fin.getY()].Style.BackColor = Color.FromArgb(255 - 10*fon, 255 - 10*fon, 0);
                 //grid_hartakarun.Rows[fin.getX()].Cells[fin.getY()].Style.ForeColor = Color.FromArgb(255 - 10*fon, 255 - 10*fon, 0);
@@ -241,15 +214,16 @@ namespace TreasureHunt
             }
             foreach (Coordinate x in dfs_sol.getRoute())
             {
+                grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Blue;
+                grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Blue;
+                await Task.Delay(delay);
+                if (grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Value == "Start" || grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Value == "Treassure")
+                {
+                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Black;
+                }
                 if (visited[x.getX(), x.getY()] == 0)
                 {
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Blue;
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Blue;
-                    await Task.Delay(delay);
-                    if (grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Value == "Start" || grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Value == "Treassure")
-                    {
-                        grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Black;
-                    }
+
                     grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.FromArgb(255, 255, 0);
                     //grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.FromArgb(255, 255, 0);
                     visited[x.getX(), x.getY()]++;
@@ -257,13 +231,6 @@ namespace TreasureHunt
                 else
                 {
                     int a = visited[x.getX(), x.getY()];
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Blue;
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Blue;
-                    await Task.Delay(delay);
-                    if (grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Value == "Start" || grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Value == "Treassure")
-                    {
-                        grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Black;
-                    }
                     grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.FromArgb(255-10*a, 255-10*a, 0);
                     //grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.FromArgb(255-10*a, 255-10*a, 0);
                     visited[x.getX(), x.getY()]++;
