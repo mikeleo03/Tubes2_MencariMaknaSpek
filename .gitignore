@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/src/Form1.resx
+/src/Form1.Designer.cs
+/src/Form1.cs
