@@ -48,11 +48,11 @@
   <ItemGroup>
     <Compile Include="Algorithm\BFSSolver.cs" />
     <Compile Include="Algorithm\DFSSolver.cs" />
+    <Compile Include="Application\DataGrid.cs" />
     <Compile Include="Container\Route.cs" />
     <Compile Include="Container\Coordinate.cs" />
     <Compile Include="Container\MatrixNode.cs" />
     <Compile Include="Container\Node.cs" />
-    <Compile Include="DataGrid.cs" />
     <Compile Include="Application\App.cs">
       <SubType>Form</SubType>
     </Compile>
