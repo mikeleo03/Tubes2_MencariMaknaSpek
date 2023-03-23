@@ -25,15 +25,14 @@ namespace TreasureHunt.Container {
         }
 
         // getter
-        public int getRow()
-        {
+        public int getRow() {
             return this.row;
         }
 
-        public int getCol()
-        {
+        public int getCol() {
             return this.col;
         }
+        
         public Coordinate getStart() {
             return this.start;
         }
@@ -48,10 +47,8 @@ namespace TreasureHunt.Container {
 
         // setter
         public void clearVisits() {
-            for (int i = 0; i < this.row; i++) 
-            {
-                for (int j = 0; j < this.col; j++)
-                {
+            for (int i = 0; i < this.row; i++) {
+                for (int j = 0; j < this.col; j++) {
                     this.map[i, j].reset();
                 }
             }

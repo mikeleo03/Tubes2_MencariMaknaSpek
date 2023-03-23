@@ -28,7 +28,6 @@ namespace TreasureHunt.Algorithm {
             return this.route;
         }
 
-
         // fill the matrix needed for dfs
         public void fillMaze(String fileName) {
             this.maze.fillMatrix(fileName);

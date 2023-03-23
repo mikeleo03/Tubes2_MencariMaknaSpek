@@ -37,6 +37,7 @@ namespace TreasureHunt.Algorithm {
             this.sequenceOfRoute = new List<Route>();
         }
 
+        // getter section
         public List<Route> getSequence() {
             return this.sequenceOfRoute;
         }
@@ -53,6 +54,7 @@ namespace TreasureHunt.Algorithm {
             
             // Validate expand paths
             if (flag == 1) {
+                // Normal case : ULDR
                 if (this.maze.isCoordinateValid(this.currentLoc.moveUp())) {  // UP
                     if (this.maze.isCoordinatePassable(this.currentLoc.moveUp())) {
                         Coordinate temp1 = this.currentLoc.moveUp();
@@ -86,6 +88,7 @@ namespace TreasureHunt.Algorithm {
                     }
                 }
             } else {
+                // Normal case : RDLU
                 if (this.maze.isCoordinateValid(this.currentLoc.moveRight())) {  // RIGHT
                     if (this.maze.isCoordinatePassable(this.currentLoc.moveRight())) {
                         Coordinate temp2 = this.currentLoc.moveRight();
@@ -147,6 +150,7 @@ namespace TreasureHunt.Algorithm {
             return neighborNode;
         }
 
+        // Search done flag
         public bool isSearchDone() {
             bool temp = false;
             foreach (Route routes in this.queueRoute) {
@@ -172,7 +176,7 @@ namespace TreasureHunt.Algorithm {
         }
 
         public void solve() {
-            Route initial_route = new Route();
+            Route initial_route = new Route(this.maze);
             initial_route.addElement(this.currentLoc);
             this.maze.visitCoordinate(this.currentLoc);
             this.queueRoute.Enqueue(initial_route);
@@ -183,7 +187,7 @@ namespace TreasureHunt.Algorithm {
                 initial_route = this.queueRoute.Dequeue();
                 this.currentLoc = initial_route.getRoutesTop();
                 foreach (Coordinate coords in expandWithBFS(1)) {
-                    Route tempRoute = new Route();
+                    Route tempRoute = new Route(this.maze);
                     tempRoute.copyRoute(initial_route);
                     this.currentLoc = coords;
                     if (this.maze.isTreasure(this.currentLoc) && !tempRoute.isTreasureVisited(this.currentLoc)) {
@@ -201,7 +205,7 @@ namespace TreasureHunt.Algorithm {
         public void solveAndTSP() {
             solve();
             this.maze.clearVisits();
-            Route initial_route = new Route();
+            Route initial_route = new Route(this.maze);
             initial_route.copyRoute(this.finalRoute);
             this.maze.visitCoordinate(this.currentLoc);
             this.queueRouteTSP.Enqueue(initial_route);
@@ -211,7 +215,7 @@ namespace TreasureHunt.Algorithm {
                 initial_route = this.queueRouteTSP.Dequeue();
                 this.currentLoc = initial_route.getRoutesTop();
                 foreach (Coordinate coords in expandWithBFS(2)) {
-                    Route tempRoute = new Route();
+                    Route tempRoute = new Route(this.maze);
                     tempRoute.copyRoute(initial_route);
                     this.currentLoc = coords;
                     

@@ -12,6 +12,7 @@ namespace TreasureHunt.Container {
         private int numsTreasure;
         private int length;
         private Coordinate currentCoordinate;
+        private MatrixNode matrixVisit;
 
         // public section
         // constructor
@@ -21,6 +22,16 @@ namespace TreasureHunt.Container {
             this.routes = new List<Coordinate>();
             this.visitedTreasure = new List<Coordinate>();
             this.currentCoordinate = new Coordinate();
+            this.matrixVisit = new MatrixNode();
+        }
+
+        public Route(MatrixNode maze) {
+            this.numsTreasure = 0;
+            this.length = 0;
+            this.routes = new List<Coordinate>();
+            this.visitedTreasure = new List<Coordinate>();
+            this.currentCoordinate = maze.getStart();
+            this.matrixVisit = maze;
         }
 
         // getter
@@ -32,6 +43,30 @@ namespace TreasureHunt.Container {
             return this.currentCoordinate;
         }
         
+        public int getRouteLength() {
+            return this.length;
+        }
+
+        public List<Coordinate> getRoutes() {
+            return this.routes;
+        }
+
+        public Coordinate getRoutesTop() {
+            return this.routes[this.length - 1];
+        }
+
+        public int getRoutesTopX() {
+            return this.routes[this.length - 1].getX();
+        }
+
+        public int getRoutesTopY() {
+            return this.routes[this.length - 1].getY();
+        }
+
+        public int getNumsCoordinateVisited(Coordinate coord) {
+            return this.matrixVisit.getVisitedTime(coord);
+        }
+
         public void addNumsTreasure(Coordinate treasurePoint) {
             this.numsTreasure++;
             this.visitedTreasure.Add(treasurePoint);
@@ -46,29 +81,10 @@ namespace TreasureHunt.Container {
             return false;
         }
 
-        public int getRouteLength() {
-            return this.length;
-        }
-
-        public int getRoutesTopX() {
-            return this.routes[this.length - 1].getX();
-        }
-
-        public int getRoutesTopY() {
-            return this.routes[this.length - 1].getY();
-        }
-
-        public Coordinate getRoutesTop() {
-            return this.routes[this.length - 1];
-        }
-
-        public List<Coordinate> getRoutes() {
-            return this.routes;
-        }
-
         public void addElement(Coordinate coord) {
             this.routes.Add(coord);
             this.currentCoordinate = coord;
+            this.matrixVisit.visitCoordinate(coord);
             this.length++;
         }
 
@@ -84,6 +100,7 @@ namespace TreasureHunt.Container {
                 this.visitedTreasure.Add(oldRoutes.visitedTreasure[i]);
             }
             this.currentCoordinate = oldRoutes.getCurrentCoordinate();
+            this.matrixVisit = oldRoutes.matrixVisit;
         }
 
         public List<String> getSequenceOfDirection() {
@@ -100,12 +117,6 @@ namespace TreasureHunt.Container {
                 }
             }
             return sequence;
-        }
-        
-        public void printPath() {
-            for (int i = 0; i < getRouteLength(); i++) {
-                Console.WriteLine($"pathhh: \t({routes[i].getX()}, {routes[i].getY()}) -");
-            }
         }
     }
 }
