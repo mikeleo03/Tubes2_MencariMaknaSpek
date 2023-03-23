@@ -51,7 +51,12 @@ namespace TreasureHunt.Container {
             return this.map[test.getX(), test.getY()].getVisitedTime();
         }
 
-        // 7. Mengubah jumlah kunjungan semua simpul pada peta menjadi 0
+        // 7. Getter elemen baris ke-i kolom ke-j dari map
+        public Node getMapElement(int i, int j) {
+            return this.map[i, j];
+        }
+
+        // 8. Mengubah jumlah kunjungan semua simpul pada peta menjadi 0
         public void clearVisits() {
             for (int i = 0; i < this.row; i++) {
                 for (int j = 0; j < this.col; j++) {
@@ -60,7 +65,7 @@ namespace TreasureHunt.Container {
             }
         }
 
-        // 8. Menginisiasi seluruh atribut objek MatrixNode sesuai hasil parsing file
+        // 9. Menginisiasi seluruh atribut objek MatrixNode sesuai hasil parsing file
         public void fillMatrix(string fileName) {
             Parser parser = new Parser(fileName);
             this.map = parser.parseAndFill();
@@ -70,36 +75,36 @@ namespace TreasureHunt.Container {
             this.numOfTreasure = parser.getTreasure();
         }
 
-        // 9. mengembalikan true jika test valid sebagai koordinat pada matriks
+        // 10. mengembalikan true jika test valid sebagai koordinat pada matriks
         // false jika tidak
         public bool isCoordinateValid(Coordinate test) {
             return test.getX() >= 0 && test.getX() < this.row && test.getY() >= 0 && test.getY() < this.col;
         }
 
-        // 10. Mengembalikan true jika simpul dengan koordinat test tidak memiliki 
+        // 11. Mengembalikan true jika simpul dengan koordinat test tidak memiliki 
         // simbol berupa simbol X, false jika tidak
         public bool isCoordinatePassable(Coordinate test) {
             return this.map[test.getX(), test.getY()].getType() != 'X';
         }
 
-        // 11. mengembalikan true jika simpul dengan koordinat test memiliki simbol
+        // 12. mengembalikan true jika simpul dengan koordinat test memiliki simbol
         // berupa simbol T, false jika tidak
         public bool isTreasure(Coordinate test) {
             return this.map[test.getX(), test.getY()].getType() == 'T';
         }
 
-        // 12. mengembalikan true jika simpul dengan koordinat test sudah pernah
+        // 13. mengembalikan true jika simpul dengan koordinat test sudah pernah
         // dikunjungi setidaknya satu kali, false jika tidak
         public bool isVisited(Coordinate test) {
             return this.map[test.getX(), test.getY()].getVisitedTime() > 0;
         }
 
-        // 13. Menaikkan jumlah kunjungan pada simpul dengan koordinat test sebesar 1
+        // 14. Menaikkan jumlah kunjungan pada simpul dengan koordinat test sebesar 1
         public void visitCoordinate(Coordinate test) {
             this.map[test.getX(), test.getY()].visit();
         }
 
-        // 14. Mengubah setiap baris pada simpul menjadi suatu string berisi simbol simpul
+        // 15. Mengubah setiap baris pada simpul menjadi suatu string berisi simbol simpul
         public string[] convertToStringArray() {
             string[] lines = new string[0];
             string line;

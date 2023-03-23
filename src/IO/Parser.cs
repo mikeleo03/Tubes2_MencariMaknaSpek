@@ -117,8 +117,7 @@ namespace TreasureHunt.IO {
                     processCharacter(character[0]);
                     if (character[0] != 'X') {
                         this.map[i, j] = new Node(character[0], this.i, this.j, 0);
-                    }
-                    else {
+                    } else {
                         this.map[i, j] = new Node(character[0], this.i, this.j, -1);
                     }
                     this.j++;
