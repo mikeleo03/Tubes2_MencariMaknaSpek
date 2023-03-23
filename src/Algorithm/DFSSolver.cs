@@ -5,6 +5,8 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using TreasureHunt.Container;
+using System.Timers;
+using System.Diagnostics;
 
 namespace TreasureHunt.Algorithm {
     class DFSSolver {
@@ -25,6 +27,7 @@ namespace TreasureHunt.Algorithm {
         public Coordinate[] getRoute() {
             return this.route;
         }
+
 
         // fill the matrix needed for dfs
         public void fillMaze(String fileName) {

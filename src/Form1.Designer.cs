@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.Title_Label = new System.Windows.Forms.Label();
             this.Input_Label = new System.Windows.Forms.Label();
             this.Output_Label = new System.Windows.Forms.Label();
@@ -42,10 +43,7 @@
             this.Pick_algorithm_warning = new System.Windows.Forms.Label();
             this.Search = new System.Windows.Forms.Button();
             this.Line = new System.Windows.Forms.Label();
-            this.TPS_Label = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.No_TSP_RadioButon = new System.Windows.Forms.RadioButton();
-            this.Yes_TSP_RadioButton = new System.Windows.Forms.RadioButton();
             this.Visualize_Button = new System.Windows.Forms.Button();
             this.Browse_file_warning = new System.Windows.Forms.Label();
             this.Line2 = new System.Windows.Forms.Label();
@@ -54,13 +52,22 @@
             this.Nodes_Label = new System.Windows.Forms.Label();
             this.ExT_Label = new System.Windows.Forms.Label();
             this.Visualize_Warning = new System.Windows.Forms.Label();
+            this.Delay_Scrollbar = new System.Windows.Forms.TrackBar();
+            this.label2 = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.delay_value = new System.Windows.Forms.Label();
+            this.milisekon_label = new System.Windows.Forms.Label();
+            this.Execution_time = new System.Windows.Forms.Timer(this.components);
+            this.et_value = new System.Windows.Forms.Label();
+            this.TSP_checkBox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.grid_hartakarun)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Delay_Scrollbar)).BeginInit();
             this.SuspendLayout();
             // 
             // Title_Label
             // 
             this.Title_Label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.Title_Label.Font = new System.Drawing.Font("Arial Rounded MT Bold", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Title_Label.Font = new System.Drawing.Font("Bernard MT Condensed", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Title_Label.ForeColor = System.Drawing.Color.Black;
             this.Title_Label.Location = new System.Drawing.Point(123, 9);
             this.Title_Label.Name = "Title_Label";
@@ -73,7 +80,7 @@
             // Input_Label
             // 
             this.Input_Label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.Input_Label.Font = new System.Drawing.Font("Arial Rounded MT Bold", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Input_Label.Font = new System.Drawing.Font("Bernard MT Condensed", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Input_Label.Location = new System.Drawing.Point(38, 110);
             this.Input_Label.Name = "Input_Label";
             this.Input_Label.Size = new System.Drawing.Size(611, 43);
@@ -84,7 +91,7 @@
             // Output_Label
             // 
             this.Output_Label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.Output_Label.Font = new System.Drawing.Font("Arial Rounded MT Bold", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Output_Label.Font = new System.Drawing.Font("Bernard MT Condensed", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Output_Label.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
             this.Output_Label.Location = new System.Drawing.Point(692, 110);
             this.Output_Label.Name = "Output_Label";
@@ -96,7 +103,7 @@
             // Filename_label
             // 
             this.Filename_label.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.Filename_label.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Filename_label.Font = new System.Drawing.Font("Bernard MT Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Filename_label.Location = new System.Drawing.Point(40, 219);
             this.Filename_label.Name = "Filename_label";
             this.Filename_label.Size = new System.Drawing.Size(224, 43);
@@ -153,10 +160,10 @@
             // Algoritma_Label
             // 
             this.Algoritma_Label.AutoSize = true;
-            this.Algoritma_Label.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Algoritma_Label.Font = new System.Drawing.Font("Bernard MT Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Algoritma_Label.Location = new System.Drawing.Point(89, 382);
             this.Algoritma_Label.Name = "Algoritma_Label";
-            this.Algoritma_Label.Size = new System.Drawing.Size(159, 34);
+            this.Algoritma_Label.Size = new System.Drawing.Size(128, 36);
             this.Algoritma_Label.TabIndex = 7;
             this.Algoritma_Label.Text = "Algoritma";
             // 
@@ -213,16 +220,6 @@
             this.Line.TabIndex = 7;
             this.Line.Text = " \r\n";
             // 
-            // TPS_Label
-            // 
-            this.TPS_Label.AutoSize = true;
-            this.TPS_Label.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TPS_Label.Location = new System.Drawing.Point(89, 546);
-            this.TPS_Label.Name = "TPS_Label";
-            this.TPS_Label.Size = new System.Drawing.Size(74, 34);
-            this.TPS_Label.TabIndex = 12;
-            this.TPS_Label.Text = "TSP";
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -232,28 +229,6 @@
             this.label1.Size = new System.Drawing.Size(49, 16);
             this.label1.TabIndex = 15;
             this.label1.Text = "              ";
-            // 
-            // No_TSP_RadioButon
-            // 
-            this.No_TSP_RadioButon.AutoSize = true;
-            this.No_TSP_RadioButon.Location = new System.Drawing.Point(95, 623);
-            this.No_TSP_RadioButon.Name = "No_TSP_RadioButon";
-            this.No_TSP_RadioButon.Size = new System.Drawing.Size(46, 20);
-            this.No_TSP_RadioButon.TabIndex = 14;
-            this.No_TSP_RadioButon.TabStop = true;
-            this.No_TSP_RadioButon.Text = "No";
-            this.No_TSP_RadioButon.UseVisualStyleBackColor = true;
-            // 
-            // Yes_TSP_RadioButton
-            // 
-            this.Yes_TSP_RadioButton.AutoSize = true;
-            this.Yes_TSP_RadioButton.Location = new System.Drawing.Point(95, 597);
-            this.Yes_TSP_RadioButton.Name = "Yes_TSP_RadioButton";
-            this.Yes_TSP_RadioButton.Size = new System.Drawing.Size(52, 20);
-            this.Yes_TSP_RadioButton.TabIndex = 13;
-            this.Yes_TSP_RadioButton.TabStop = true;
-            this.Yes_TSP_RadioButton.Text = "Yes";
-            this.Yes_TSP_RadioButton.UseVisualStyleBackColor = true;
             // 
             // Visualize_Button
             // 
@@ -330,6 +305,70 @@
             this.Visualize_Warning.TabIndex = 23;
             this.Visualize_Warning.Text = "                                   ";
             // 
+            // Delay_Scrollbar
+            // 
+            this.Delay_Scrollbar.Location = new System.Drawing.Point(1339, 186);
+            this.Delay_Scrollbar.Maximum = 2000;
+            this.Delay_Scrollbar.Minimum = 100;
+            this.Delay_Scrollbar.Name = "Delay_Scrollbar";
+            this.Delay_Scrollbar.Size = new System.Drawing.Size(210, 56);
+            this.Delay_Scrollbar.TabIndex = 24;
+            this.Delay_Scrollbar.Value = 100;
+            this.Delay_Scrollbar.Scroll += new System.EventHandler(this.Delay_Scrollbar_Scroll);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Bernard MT Condensed", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(1333, 136);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(175, 36);
+            this.label2.TabIndex = 25;
+            this.label2.Text = "Delay Interval";
+            // 
+            // delay_value
+            // 
+            this.delay_value.AutoSize = true;
+            this.delay_value.Location = new System.Drawing.Point(1398, 234);
+            this.delay_value.Name = "delay_value";
+            this.delay_value.Size = new System.Drawing.Size(40, 16);
+            this.delay_value.TabIndex = 26;
+            this.delay_value.Text = "           ";
+            // 
+            // milisekon_label
+            // 
+            this.milisekon_label.AutoSize = true;
+            this.milisekon_label.Location = new System.Drawing.Point(1448, 234);
+            this.milisekon_label.Name = "milisekon_label";
+            this.milisekon_label.Size = new System.Drawing.Size(25, 16);
+            this.milisekon_label.TabIndex = 27;
+            this.milisekon_label.Text = "ms";
+            // 
+            // Execution_time
+            // 
+            this.Execution_time.Interval = 50;
+            // 
+            // et_value
+            // 
+            this.et_value.AutoSize = true;
+            this.et_value.Location = new System.Drawing.Point(806, 819);
+            this.et_value.Name = "et_value";
+            this.et_value.Size = new System.Drawing.Size(61, 16);
+            this.et_value.TabIndex = 28;
+            this.et_value.Text = "                  ";
+            // 
+            // TSP_checkBox
+            // 
+            this.TSP_checkBox.AutoSize = true;
+            this.TSP_checkBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TSP_checkBox.Location = new System.Drawing.Point(95, 541);
+            this.TSP_checkBox.Name = "TSP_checkBox";
+            this.TSP_checkBox.Size = new System.Drawing.Size(63, 24);
+            this.TSP_checkBox.TabIndex = 29;
+            this.TSP_checkBox.Text = "TSP";
+            this.TSP_checkBox.UseVisualStyleBackColor = true;
+            this.TSP_checkBox.CheckedChanged += new System.EventHandler(this.TSP_checkBox_CheckedChanged);
+            // 
             // TreasureFinder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -337,6 +376,12 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.LightBlue;
             this.ClientSize = new System.Drawing.Size(1641, 1033);
+            this.Controls.Add(this.TSP_checkBox);
+            this.Controls.Add(this.et_value);
+            this.Controls.Add(this.milisekon_label);
+            this.Controls.Add(this.delay_value);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.Delay_Scrollbar);
             this.Controls.Add(this.Visualize_Warning);
             this.Controls.Add(this.ExT_Label);
             this.Controls.Add(this.Nodes_Label);
@@ -346,9 +391,6 @@
             this.Controls.Add(this.Browse_file_warning);
             this.Controls.Add(this.Visualize_Button);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.No_TSP_RadioButon);
-            this.Controls.Add(this.Yes_TSP_RadioButton);
-            this.Controls.Add(this.TPS_Label);
             this.Controls.Add(this.Line);
             this.Controls.Add(this.Search);
             this.Controls.Add(this.Pick_algorithm_warning);
@@ -366,6 +408,7 @@
             this.Name = "TreasureFinder";
             this.Text = "TreasureFinder";
             ((System.ComponentModel.ISupportInitialize)(this.grid_hartakarun)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Delay_Scrollbar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -387,10 +430,7 @@
         private System.Windows.Forms.Label Pick_algorithm_warning;
         private System.Windows.Forms.Button Search;
         private System.Windows.Forms.Label Line;
-        private System.Windows.Forms.Label TPS_Label;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.RadioButton No_TSP_RadioButon;
-        private System.Windows.Forms.RadioButton Yes_TSP_RadioButton;
         private System.Windows.Forms.Button Visualize_Button;
         private System.Windows.Forms.Label Browse_file_warning;
         private System.Windows.Forms.Label Line2;
@@ -399,6 +439,14 @@
         private System.Windows.Forms.Label Nodes_Label;
         private System.Windows.Forms.Label ExT_Label;
         private System.Windows.Forms.Label Visualize_Warning;
+        private System.Windows.Forms.TrackBar Delay_Scrollbar;
+        private System.Windows.Forms.Label label2;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Label delay_value;
+        private System.Windows.Forms.Label milisekon_label;
+        private System.Windows.Forms.Timer Execution_time;
+        private System.Windows.Forms.Label et_value;
+        private System.Windows.Forms.CheckBox TSP_checkBox;
     }
 }
 

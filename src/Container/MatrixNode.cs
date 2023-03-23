@@ -25,6 +25,15 @@ namespace TreasureHunt.Container {
         }
 
         // getter
+        public int getRow()
+        {
+            return this.row;
+        }
+
+        public int getCol()
+        {
+            return this.col;
+        }
         public Coordinate getStart() {
             return this.start;
         }
