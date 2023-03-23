@@ -17,6 +17,7 @@ namespace TreasureHunt.Algorithm {
         private Route finalRoute;               // Rute akhir pecarian
         private Route finalRouteTSP;            // Rute akhir pencarian dengan TSP
         private List<Route> sequenceOfRoute;    // Senarai penampung urutan rute
+        private int nodeCount;                  // Menghitung banyaknya node yang dikunjungi
 
         // Metode kelas
         // 1. Konstruktor objek BFSSolver (default)
@@ -28,6 +29,7 @@ namespace TreasureHunt.Algorithm {
             this.finalRoute = new Route();
             this.finalRouteTSP = new Route();
             this.sequenceOfRoute = new List<Route>();
+            this.nodeCount = 0;
         }
 
         // 2. Konstruktor objek BFSSolver
@@ -39,6 +41,7 @@ namespace TreasureHunt.Algorithm {
             this.finalRoute = new Route();
             this.finalRouteTSP = new Route();
             this.sequenceOfRoute = new List<Route>();
+            this.nodeCount = 0;
         }
 
         // 3. Getter atribut sequenceOfRoute
@@ -52,14 +55,7 @@ namespace TreasureHunt.Algorithm {
         }
         
         // 5. Getter atribut finalRouteTSP
-        public Route getFinalRouteTSP() { 
-            
-            
-            
-            
-            
-            
-            
+        public Route getFinalRouteTSP() {   
             return this.finalRouteTSP; 
         }
 
@@ -207,6 +203,7 @@ namespace TreasureHunt.Algorithm {
             Route initial_route = new Route();
             initial_route.addElement(this.currentLoc);
             this.maze.visitCoordinate(this.currentLoc);
+            this.nodeCount++;
             this.queueRoute.Enqueue(initial_route);
             this.sequenceOfRoute.Add(initial_route);
 
@@ -223,6 +220,7 @@ namespace TreasureHunt.Algorithm {
                     }
 
                     this.maze.visitCoordinate(this.currentLoc);
+                    this.nodeCount++;
                     tempRoute.addElement(this.currentLoc);
                     this.queueRoute.Enqueue(tempRoute);
                     this.sequenceOfRoute.Add(tempRoute);
@@ -249,6 +247,7 @@ namespace TreasureHunt.Algorithm {
                     this.currentLoc = coords;
 
                     this.maze.visitCoordinate(this.currentLoc);
+                    this.nodeCount++;
                     tempRoute.addElement(this.currentLoc);
                     this.queueRouteTSP.Enqueue(tempRoute);
                     this.sequenceOfRoute.Add(tempRoute);
@@ -259,28 +258,19 @@ namespace TreasureHunt.Algorithm {
         // 11. Mendapatkan jumlah node yang dikunjungi
         // Jika dikunjungi lebih dari 1 kali, maka juga diperhitungkan
         public int numsOfNode() {
-            int count = 0;
-            for (int i = 0; i < this.maze.getRow(); i++) {
-                for (int j = 0; j < this.maze.getCol(); j++) {
-                    if (this.maze.getMapElement(i, j).getVisitedTime() != -1) {
-                        count += this.maze.getMapElement(i, j).getVisitedTime();
-                    }
-                }
-            }
-
-            return count;
+            return this.nodeCount;
         }
 
         // 12. Mendapatkan jumlah step yang diperlukan dari awal hingga solusi
         // ditemukan dengan algoritma BFS
         public int numsOfSteps() {
-            return finalRoute.getRouteLength();
+            return finalRoute.getRouteLength() - 1;
         }
 
         // 13. Mendapatkan jumlah step yang diperlukan dari awal hingga solusi
         // ditemukan dengan algoritma BFS dengan TSP
         public int numsOfStepsTSP() {
-            return numsOfSteps() + finalRouteTSP.getRouteLength();
+            return finalRouteTSP.getRouteLength() - 1;
         }
     }
 }
