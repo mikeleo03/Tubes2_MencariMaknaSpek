@@ -181,6 +181,7 @@ namespace TreasureHunt
                 
                 int fon = visited[fin.getX(), fin.getY()];
                 grid_hartakarun.Rows[fin.getX()].Cells[fin.getY()].Style.BackColor = Color.FromArgb(255 - 15*fon, 255 - 15*fon, 0);
+                visited[fin.getX(), fin.getY()]++;
                 //grid_hartakarun.Rows[fin.getX()].Cells[fin.getY()].Style.ForeColor = Color.FromArgb(255 - 10*fon, 255 - 10*fon, 0);
             }
         }
