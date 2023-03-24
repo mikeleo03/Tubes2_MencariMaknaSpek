@@ -95,7 +95,7 @@ namespace TreasureHunt
             this.Output_Label.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.Output_Label.Font = new System.Drawing.Font("Bernard MT Condensed", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Output_Label.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.Output_Label.Location = new System.Drawing.Point(381, 94);
+            this.Output_Label.Location = new System.Drawing.Point(381, 110);
             this.Output_Label.Name = "Output_Label";
             this.Output_Label.Size = new System.Drawing.Size(698, 43);
             this.Output_Label.TabIndex = 2;
@@ -317,7 +317,7 @@ namespace TreasureHunt
             this.Delay_Scrollbar.Name = "Delay_Scrollbar";
             this.Delay_Scrollbar.Size = new System.Drawing.Size(210, 56);
             this.Delay_Scrollbar.TabIndex = 24;
-            this.Delay_Scrollbar.Value = 100;
+            this.Delay_Scrollbar.Value = 1000;
             this.Delay_Scrollbar.Scroll += new System.EventHandler(this.Delay_Scrollbar_Scroll);
             // 
             // label2
@@ -336,9 +336,9 @@ namespace TreasureHunt
             this.delay_value.Font = new System.Drawing.Font("Impact", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.delay_value.Location = new System.Drawing.Point(1098, 235);
             this.delay_value.Name = "delay_value";
-            this.delay_value.Size = new System.Drawing.Size(30, 17);
+            this.delay_value.Size = new System.Drawing.Size(34, 17);
             this.delay_value.TabIndex = 26;
-            this.delay_value.Text = "           ";
+            this.delay_value.Text = "1000";
             // 
             // milisekon_label
             // 
