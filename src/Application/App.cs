@@ -139,16 +139,9 @@ namespace TreasureHunt
                 }
                 foreach (Coordinate y in x.getRoutes())
                 {
-                    if (visited[y.getX(), y.getY()] == 0)
-                    {
-                        grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.FromArgb(255, 255, 0);
-                    }
-                    else
-                    {
-                        int col = visited[y.getX(), y.getY()];
-                        grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.FromArgb(255 - 15 * col, 255 - 15 * col, 0);
-                        //grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.ForeColor = Color.FromArgb(255 - 10 * col, 255 - 10 * col, 0);
-                    }
+                    int col = visited[y.getX(), y.getY()];
+                    grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.FromArgb(255 - (15 * col), 255 - (15 * col), 0);
+                    //grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.ForeColor = Color.FromArgb(255 - 10 * col, 255 - 10 * col, 0);
                     visited[y.getX(), y.getY()]++;
 
                 }
@@ -212,20 +205,10 @@ namespace TreasureHunt
                 {
                     grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Black;
                 }
-                if (visited[x.getX(), x.getY()] == 0)
-                {
-
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.FromArgb(255, 255, 0);
-                    //grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.FromArgb(255, 255, 0);
-                    visited[x.getX(), x.getY()]++;
-                }
-                else
-                {
-                    int a = visited[x.getX(), x.getY()];
-                    grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.FromArgb(255-15*a, 255-15*a, 0);
-                    //grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.FromArgb(255-10*a, 255-10*a, 0);
-                    visited[x.getX(), x.getY()]++;
-                }
+                int a = visited[x.getX(), x.getY()];
+                grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.FromArgb(255-(15*a), 255-(15*a), 0);
+                //grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.FromArgb(255-10*a, 255-10*a, 0);
+                visited[x.getX(), x.getY()]++;
             }
         }
 
