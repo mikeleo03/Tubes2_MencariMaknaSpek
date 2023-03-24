@@ -79,19 +79,15 @@ namespace TreasureHunt.IO {
         // 9. Mengubah atribut objek Parser tergantung pada c, jika terdapat 2 simbol K
         // yang muncul, maka akan melemparkan exception
         public void processCharacter(char c) {
-            if (c == 'T')
-            {
+            if (c == 'T') {
                 this.treasure++;
             }
-            else if (c == 'K')
-            {
+            else if (c == 'K') {
                 this.startPoint++;
-                if (this.startPoint == 1)
-                {
+                if (this.startPoint == 1) {
                     this.startLoc = new Coordinate(this.i, this.j);
                 }
-                if (this.startPoint > 1)
-                {
+                if (this.startPoint > 1) {
                     throw new Exception("There is too many start point");
                 }
             }
@@ -124,12 +120,9 @@ namespace TreasureHunt.IO {
                 }
                 this.i++;
             }
-            if (this.startPoint == 0)
-            {
+            if (this.startPoint == 0) {
                 throw new Exception("No startpoint");
-            }
-            else if (this.getTreasure() == 0)
-            {
+            } else if (this.getTreasure() == 0) {
                 throw new Exception("No treassure");
             }
             return this.map;

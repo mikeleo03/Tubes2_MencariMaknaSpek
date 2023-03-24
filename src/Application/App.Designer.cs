@@ -1,20 +1,12 @@
-namespace TreasureHunt
-{
-    partial class TreasureFinder
-    {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
+namespace TreasureHunt {
+    // Kelas TreasureFinder
+    partial class TreasureFinder {
+        // Inisiasi designer table
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        // Menghapus resources yang digunakan
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +18,7 @@ namespace TreasureHunt
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.Title_Label = new System.Windows.Forms.Label();
             this.Input_Label = new System.Windows.Forms.Label();
@@ -450,7 +441,6 @@ namespace TreasureHunt
             ((System.ComponentModel.ISupportInitialize)(this.Delay_Scrollbar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

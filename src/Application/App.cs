@@ -6,53 +6,41 @@ using TreasureHunt.Container;
 using TreasureHunt.Algorithm;
 using System.Diagnostics;
 
-namespace TreasureHunt 
-{
-    public partial class TreasureFinder : Form 
-    {
-        //public var fileContent = string.Empty;
-        //public var filePath = string.Empty;
-        private string fileName;
-        private int delay = 1000; // default
-        private string algorithm;
-        private bool browsed = false;
-        private bool BFS_solved = false;
-        private bool DFS_solved = false;
-        private bool TSP = false;
-        private MatrixNode maze;
-        private DFSSolver dfs_sol;
-        private BFSSolver bfs_sol;
-        private Stopwatch et = new Stopwatch();
-        private int[,] visited;
+namespace TreasureHunt  {
+    // Pemrosesan Tampilan GUI pada desktop application
+    public partial class TreasureFinder : Form {
+        private string fileName;                    // Nama file
+        private int delay = 1000;                   // Nilai default untuk time delay
+        private string algorithm;                   // Jenis algoritma yang dipilih
+        private bool browsed = false;               // Mengecek apakah sudah di-browsed
+        private bool BFS_solved = false;            // Apakah BFS sudah selesai
+        private bool DFS_solved = false;            // Apakah DFS sudah selesai
+        private bool TSP = false;                   // Apakah menerapkan metode TSP
+        private MatrixNode maze;                    // Matriks peta
+        private DFSSolver dfs_sol;                  // Pemanggilan objek DFSSolver
+        private BFSSolver bfs_sol;                  // Pemanggilan objek BFSSolver
+        private Stopwatch et = new Stopwatch();     // Stopwatch
+        private int[,] visited;                     // Matriks jumlah pengunjungan
 
+        // Konstruktor objek TreasureFinder
         public TreasureFinder() {
             InitializeComponent();
-            // grid_hartakarun.RowPostPaint += new DataGridViewRowPostPaintEventHandler(grid_hartakarun_RowPostPaint);
-            // grid_hartakarun.CellFormatting += grid_hartakarun_CellFormatting;
         }
 
-        private void label1_Click(object sender, EventArgs e) // Title Label
-        {
+        // Label judul
+        private void label1_Click(object sender, EventArgs e) {}
 
-        }
+        // Label masukan
+        private void label2_Click(object sender, EventArgs e) {}
 
-        private void label2_Click(object sender, EventArgs e) // Input Label
-        {
+        // Label keluaran
+        private void label3_Click(object sender, EventArgs e) {}
 
-        }
+        // Label nama file
+        private void label4_Click(object sender, EventArgs e) {}
 
-        private void label3_Click(object sender, EventArgs e) // Output Label
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e) // Filename Label
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e) // Browse button
-        {
+        // Tombol pencarian
+        private void button1_Click(object sender, EventArgs e) {
             OpenFileDialog openFileDialog1 = new OpenFileDialog {
                 // Title = "Browse Text File",
                 CheckFileExists = true,
@@ -66,41 +54,35 @@ namespace TreasureHunt
             };
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK) {
-                Filename_iotbox.Text = openFileDialog1.FileName; // blm ada text box jadi g dulu
+                Filename_iotbox.Text = openFileDialog1.FileName;
                 fileName = Filename_iotbox.Text;
                 DataGrid.file = Filename_iotbox.Text;
                 maze = new MatrixNode();
-                try
-                {
+                try {
                     maze = new MatrixNode();
                     this.maze.fillMatrix(Filename_iotbox.Text);
                     grid_hartakarun.DataSource = DataGrid.DataTableFromTextFile(this.maze.convertToStringArray());
                     grid_hartakarun.CellFormatting += grid_hartakarun_CellFormatting;
                     Filename_iotbox.Text = openFileDialog1.SafeFileName;
                     int tinggi = grid_hartakarun.Height / grid_hartakarun.Rows.Count;
-                    foreach (DataGridViewRow row in grid_hartakarun.Rows)
-                    {
+                    foreach (DataGridViewRow row in grid_hartakarun.Rows) {
                         row.Height = tinggi;
                     }
+
                     browsed = true;
-                    if (grid_hartakarun.SelectedCells.Count > 0)
-                    {
-                        // Clear the selection
+                    if (grid_hartakarun.SelectedCells.Count > 0) {
+                        // Menghapus seleksi
                         grid_hartakarun.ClearSelection();
                     }
-                }
-                catch
-                {
+
+                } catch {
                     Browse_file_warning.Text = "Invalid file";
                 }
-                
-               
             }
-
         }
 
-        private void grid_hartakarun_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) // Pewarnaan grid terbaca 
-        {
+        // Pewarnaan grid yang terbaca
+        private void grid_hartakarun_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e) {
             foreach (DataGridViewRow row in grid_hartakarun.Rows) {
                 for (int i = 0; i < grid_hartakarun.ColumnCount; i++) {
                     if (row.Cells[i].Value != null) {
@@ -125,243 +107,206 @@ namespace TreasureHunt
                 }
             }
         }
-        private async void BFS_Algo()
-        {
-            foreach (Route x in bfs_sol.getSequence())
-            {
+
+        // Implementasi dari algoritma BFS
+        private async void BFS_Algo() {
+            foreach (Route x in bfs_sol.getSequence()) {
                 visited = new int[this.maze.getRow(), this.maze.getCol()];
-                for (int i = 0; i < this.maze.getRow(); i++)
-                {
-                    for (int j = 0; j < this.maze.getCol(); j++)
-                    {
+                for (int i = 0; i < this.maze.getRow(); i++) {
+                    for (int j = 0; j < this.maze.getCol(); j++) {
                         visited[i, j] = 0;
                     }
                 }
-                foreach (Coordinate y in x.getRoutes())
-                {
+
+                foreach (Coordinate y in x.getRoutes()) {
                     int col = visited[y.getX(), y.getY()];
                     grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.BackColor = Color.FromArgb(255 - (15 * col), 255 - (15 * col), 0);
-                    //grid_hartakarun.Rows[y.getX()].Cells[y.getY()].Style.ForeColor = Color.FromArgb(255 - 10 * col, 255 - 10 * col, 0);
                     visited[y.getX(), y.getY()]++;
-
                 }
+
                 grid_hartakarun.Rows[x.getRoutesTopX()].Cells[x.getRoutesTopY()].Style.BackColor = Color.Blue;
                 grid_hartakarun.Rows[x.getRoutesTopX()].Cells[x.getRoutesTopY()].Style.ForeColor = Color.Blue;
                 await Task.Delay(delay);
-                if (grid_hartakarun.Rows[x.getRoutesTopX()].Cells[x.getRoutesTopY()].Value == "Start" || grid_hartakarun.Rows[x.getRoutesTopX()].Cells[x.getRoutesTopY()].Value == "Treassure")
-                {
+
+                if (grid_hartakarun.Rows[x.getRoutesTopX()].Cells[x.getRoutesTopY()].Value == "Start" || grid_hartakarun.Rows[x.getRoutesTopX()].Cells[x.getRoutesTopY()].Value == "Treasure") {
                     grid_hartakarun.Rows[x.getRoutesTopX()].Cells[x.getRoutesTopY()].Style.ForeColor = Color.Black;
                 }
-                // reset every route on the way
-                foreach (Coordinate z in x.getRoutes())
-                {
+
+                // Reset semua rute
+                foreach (Coordinate z in x.getRoutes()) {
                     grid_hartakarun.Rows[z.getX()].Cells[z.getY()].Style.BackColor = Color.White;
-                    //grid_hartakarun.Rows[z.getX()].Cells[z.getY()].Style.ForeColor = Color.White;
                 }
             }
+
             Route o;
-            if (TSP)
-            {
+            if (TSP) {
                 o = bfs_sol.getFinalRouteTSP();
-            }
-            else
-            {
+            } else {
                 o = bfs_sol.getFinalRoute();
             }
+
             visited = new int[this.maze.getRow(), this.maze.getCol()];
-            for (int i = 0; i < this.maze.getRow(); i++)
-            {
-                for (int j = 0; j < this.maze.getCol(); j++)
-                {
+            for (int i = 0; i < this.maze.getRow(); i++) {
+                for (int j = 0; j < this.maze.getCol(); j++) {
                     visited[i, j] = 0;
                 }
             }
-            foreach (Coordinate fin in o.getRoutes())
-            {
-                
+
+            foreach (Coordinate fin in o.getRoutes()) {
                 int fon = visited[fin.getX(), fin.getY()];
                 grid_hartakarun.Rows[fin.getX()].Cells[fin.getY()].Style.BackColor = Color.FromArgb(255 - 15*fon, 255 - 15*fon, 0);
                 visited[fin.getX(), fin.getY()]++;
-                //grid_hartakarun.Rows[fin.getX()].Cells[fin.getY()].Style.ForeColor = Color.FromArgb(255 - 10*fon, 255 - 10*fon, 0);
             }
         }
 
-        private async void DFS_Algo()
-        {
-            //maze = new MatrixNode();
+        // Implementasi dari algoritma DFS
+        private async void DFS_Algo() {
             visited = new int[this.maze.getRow(), this.maze.getCol()];
-            for (int i = 0; i < this.maze.getRow(); i++)
-            {
-                for (int j = 0; j < this.maze.getCol(); j++)
-                {
+            for (int i = 0; i < this.maze.getRow(); i++) {
+                for (int j = 0; j < this.maze.getCol(); j++) {
                     visited[i,j] = 0;
                 }
             }
-            foreach (Coordinate x in dfs_sol.getRoute())
-            {
+
+            foreach (Coordinate x in dfs_sol.getRoute()) {
                 grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.Blue;
                 grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Blue;
+                
                 await Task.Delay(delay);
-                if (grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Value == "Start" || grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Value == "Treassure")
-                {
+                
+                if (grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Value == "Start" || grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Value == "Treasure") {
                     grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.Black;
                 }
+
                 int a = visited[x.getX(), x.getY()];
                 grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.BackColor = Color.FromArgb(255-(15*a), 255-(15*a), 0);
-                //grid_hartakarun.Rows[x.getX()].Cells[x.getY()].Style.ForeColor = Color.FromArgb(255-10*a, 255-10*a, 0);
                 visited[x.getX(), x.getY()]++;
             }
         }
 
-
-        private void Search_Click_1(object sender, EventArgs e)
-        {
-            if (browsed)
-            {
+        // Tombol search click 1
+        private void Search_Click_1(object sender, EventArgs e) {
+            if (browsed) {
                 ClearTable();
                 this.maze.fillMatrix(fileName);
                 Browse_file_warning.Text = "";
                 Route_result.Text = "";
-                if (algorithm == "BFS")
-                {
+                if (algorithm == "BFS") {
                     Route_result.Text = "";
                     Pick_algorithm_warning.Text = "";
                     bfs_sol = new BFSSolver(this.maze);
                     et.Start();
-                    if (TSP)
-                    {
+
+                    if (TSP) {
                         bfs_sol.solveAndTSP();
                         et.Stop();
-                        foreach (String x in bfs_sol.getFinalRouteTSP().getSequenceOfDirection())
-                        {
+
+                        foreach (String x in bfs_sol.getFinalRouteTSP().getSequenceOfDirection()) {
                             Route_result.Text += x + "-";
                         }
+
                         Route_result.Text = Route_result.Text.Substring(0, Route_result.Text.Length - 1);
                         Steps_taken.Text = bfs_sol.numsOfStepsTSP().ToString();
-                    }
-                    else
-                    {
+                    } else {
                         bfs_sol.solve();
                         et.Stop();
-                        foreach (String x in bfs_sol.getFinalRoute().getSequenceOfDirection())
-                        {
+
+                        foreach (String x in bfs_sol.getFinalRoute().getSequenceOfDirection()) {
                             Route_result.Text += x + "-";
                         }
+
                         Route_result.Text = Route_result.Text.Substring(0, Route_result.Text.Length - 1);
                         Steps_taken.Text = bfs_sol.numsOfSteps().ToString();
                     }
+
                     Nodes_taken.Text = bfs_sol.numsOfNode().ToString();
                     et_value.Text = et.ElapsedMilliseconds + " ms";
                     et.Reset();
                     BFS_solved = true;
                     DFS_solved = false;
-                    // algoritma BFS
-                }
-                else if (algorithm == "DFS")
-                {
+                } else if (algorithm == "DFS") {
                     Pick_algorithm_warning.Text = "";
                     dfs_sol = new DFSSolver();
                     dfs_sol.fillMaze(fileName);
-                    //et.Reset();
                     et.Start();
-                    if (TSP)
-                    {
+
+                    if (TSP) {
                         dfs_sol.solveAndTSP();
                         et.Stop();
-                    }
-                    else
-                    {
+                    } else {
                         dfs_sol.solve();
                         et.Stop();
                     }
-                    foreach (String x in dfs_sol.getSequenceOfDirection())
-                    {
+
+                    foreach (String x in dfs_sol.getSequenceOfDirection()) {
                         Route_result.Text += x + "-";
                     }
+
                     Route_result.Text = Route_result.Text.Substring(0, Route_result.Text.Length - 1);
                     Steps_taken.Text = (dfs_sol.getRoute().Length-1).ToString();
                     Nodes_taken.Text = (dfs_sol.getRoute().Length - 1).ToString();
                     et_value.Text = et.ElapsedMilliseconds +" ms";
-                    
                     et.Reset();
-
                     DFS_solved = true;
                     BFS_solved = false;
-                    // algoritma DFS
-                }
-                else
-                {
+                } else {
                     algorithm = "";
                     Pick_algorithm_warning.Text = "Pick the algorithm first!";
                 }
-            }
-            else
-            {
+            } else {
                 Browse_file_warning.Text = "Choose a txt file first!";
             }
         }
 
-        private void BFS_option_CheckedChanged(object sender, EventArgs e)
-        {
+        // Tombol transisi algoritma BFS
+        private void BFS_option_CheckedChanged(object sender, EventArgs e) {
             algorithm = "BFS";
         }
 
-        private void DFS_option_CheckedChanged(object sender, EventArgs e)
-        {
+        // Tombol transisi algoritma DFS
+        private void DFS_option_CheckedChanged(object sender, EventArgs e) {
             algorithm = "DFS";
         }
 
-        public void ClearTable()
-        {
-            foreach (DataGridViewRow row in grid_hartakarun.Rows)
-            {
-                for (int i = 0; i < grid_hartakarun.ColumnCount; i++)
-                { 
-                    if (row.Cells[i].Style.BackColor != Color.Black)
-                    {
+        // Menghapus elemen warna pada tabel
+        public void ClearTable() {
+            foreach (DataGridViewRow row in grid_hartakarun.Rows) {
+                for (int i = 0; i < grid_hartakarun.ColumnCount; i++) { 
+                    if (row.Cells[i].Style.BackColor != Color.Black) {
                         row.Cells[i].Style.BackColor = Color.White;
                     }
                 }
             }
         }
-        private void Visualize_Button_Click(object sender, EventArgs e)
-        {
-            // ini nanti dipisah
-            if (BFS_solved)
-            {
+
+        // Tombol visualisasi tombol
+        private void Visualize_Button_Click(object sender, EventArgs e) {
+            if (BFS_solved) {
                 ClearTable();
                 Visualize_Warning.Text = "";
                 BFS_Algo();
                 BFS_solved = false;
-            }
-            else if (DFS_solved)
-            {
+            } else if (DFS_solved) {
                 ClearTable();
                 Visualize_Warning.Text = "";
                 DFS_Algo();
                 DFS_solved = false;
-            }
-            else
-            {
+            } else {
                 Visualize_Warning.Text = "Solve the chosen file first!";
             }
-
         }
 
-        private void Delay_Scrollbar_Scroll(object sender, EventArgs e)
-        {
+        // Scrollbar delay time
+        private void Delay_Scrollbar_Scroll(object sender, EventArgs e) {
             delay_value.Text = Delay_Scrollbar.Value.ToString();
             delay = Delay_Scrollbar.Value;
         }
 
-        private void TSP_checkBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if (TSP_checkBox.Checked)
-            {
+        // Tombol checkbox TSP
+        private void TSP_checkBox_CheckedChanged(object sender, EventArgs e) {
+            if (TSP_checkBox.Checked) {
                 TSP = true;
-            }
-            else
-            {
+            } else {
                 TSP = false;
             }
         }
