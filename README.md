@@ -75,16 +75,11 @@ $ bin/TreasureHunt
 
 ## Cara Mengoprasikan Program
 1. Pada bagian awal akan muncul tampilan muka dari *desktop application* yang telah dibangun
-2. Pengguna dapat memasukkan *file maze* yang ingin dianalisis dengan menekan tombol `Browse` pada  
-   bagian kiri atas. Selanjutnya pengguna akan diarahkan pada laman pemilihan dokumen. Pilih *file*
+2. Pengguna dapat memasukkan *file maze* yang ingin dianalisis dengan menekan tombol `Browse` pada bagian kiri atas. Selanjutnya pengguna akan diarahkan pada laman pemilihan dokumen. Pilih *file*
    yang ingin diproses lalu tekan tombol `open`.
 
-   Jika *file* Anda valid, maka aplikasi akan menunjukkan peta hasil pembacaan daru *file* yang telah digenerasi oleh aplikasi. Jika tidak, maka aplikasi akan mengabarkan *error* yang mengatakan *file* tidak valid sehingga Anda harus memberikan masukan ulang.
-3. Setelah hasil generasi petak dimunculkan, pengguna diarahkan untuk memilih algoritma yang akan 
-   digunakan. Pilihan algoritma terdiri atas algoritma BFS dan DFS. Pemrosesan tidak akan dilanjutkan sebelum pengguna memilih satu jenis algoritma yang diinginkan.
-4. Selanjutnya, pengguna akan diminta untuk memilih apakah ingin mengimplementasikan TSP pada proses 
-   pencarian. Jika iya, maka pengguna harus memberikan *checklist* pada kolom TSP yang tersedia. Secara *default* proses pencarian tidak mengimplementasikan TSP.
-5. Setelah seluruh prosedur diatas dilakukan, pengguna dapat melihat hasil penyelesaian dari algoritma
-   dan skema yang dipilih dengan menekan tombol `Solve` pada bagian tengah bawah. Informasi terkait proses pencarian meliputi rute, jumlah langkah, jumlah simpul yang dikunjungi, dan waktu ekekusi akan muncul sesaat setelah tombol tersebut ditekan.
-6. Sebagai pelengkap, pengguna juga dapat melihat hasil akhir dan proses pencarian menggunakan algoritma
-   yang dipilih hingga ditemukan solusi rute yang memenuhi kondisi dengan menekan tombol `Visualize`. Pengguna juga dapat mengatur interval *delay* dari penampilan proses pencarian dengan menggerakkan *scrollbar* yang berada pada bagian kanan atas sesuai kebutuhan.
+   Jika *file* Anda valid, maka aplikasi akan menunjukkan peta hasil pembacaan dari *file* yang telah digenerasi oleh aplikasi. Jika tidak, maka aplikasi akan mengabarkan *error* yang mengatakan *file* tidak valid sehingga Anda harus memberikan masukan ulang.
+3. Setelah hasil generasi petak dimunculkan, pengguna diarahkan untuk memilih algoritma yang akan digunakan. Pilihan algoritma terdiri atas algoritma BFS dan DFS. Pemrosesan tidak akan dilanjutkan sebelum pengguna memilih satu jenis algoritma yang diinginkan.
+4. Selanjutnya, pengguna akan diminta untuk memilih apakah ingin mengimplementasikan TSP pada proses pencarian. Jika iya, maka pengguna harus memberikan *checklist* pada kolom TSP yang tersedia. Secara *default* proses pencarian tidak mengimplementasikan TSP.
+5. Setelah seluruh prosedur diatas dilakukan, pengguna dapat melihat hasil penyelesaian dari algoritma dan skema yang dipilih dengan menekan tombol `Solve` pada bagian tengah bawah. Informasi terkait proses pencarian meliputi rute, jumlah langkah, jumlah simpul yang dikunjungi, dan waktu eksekusi akan muncul sesaat setelah tombol tersebut ditekan.
+6. Sebagai pelengkap, pengguna juga dapat melihat hasil akhir dan proses pencarian menggunakan algoritma yang dipilih hingga ditemukan solusi rute yang memenuhi kondisi dengan menekan tombol `Visualize`. Pengguna juga dapat mengatur interval *delay* dari penampilan proses pencarian dengan menggerakkan *scroll bar* yang berada pada bagian kanan atas sesuai kebutuhan.
