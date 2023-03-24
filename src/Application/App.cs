@@ -119,7 +119,7 @@ namespace TreasureHunt
                         } else if (Convert.ToString(row.Cells[i].Value) == "T") {
                             row.Cells[i].Style.BackColor = Color.White;
                             row.Cells[i].Style.ForeColor = Color.Black;
-                            row.Cells[i].Value = "Treassure";
+                            row.Cells[i].Value = "Treasure";
                         }
                     }
                 }
