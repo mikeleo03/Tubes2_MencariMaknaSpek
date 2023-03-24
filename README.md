@@ -50,7 +50,6 @@ C:.
 │   ├─── TreasureHunt.csproj.user
 │   └─── TreasureHunt.sln
 └─── test
-    └─── map1.txt
 ```
 
 ## Requirements
